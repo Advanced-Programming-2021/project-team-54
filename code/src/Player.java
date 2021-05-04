@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,6 +68,19 @@ public class Player {
             return false;
         }
 
+    }
+
+
+
+    public void deleteDeck(String name){
+        int i = 0 ;
+        for(;i<listOfDeck.size();i++){
+           if( name.contentEquals(listOfDeck.get(i))){
+               listOfDeck.remove(i);
+               return;
+           }
+
+        }
     }
 
     public static Player getPlayerByUsername(String username) {
@@ -170,11 +184,73 @@ public class Player {
     }
 
     public void addCard(String name, int number) {
-        this.listOfFreeCards.put(name, number);
+        if(listOfFreeCards.containsKey(name)) {
+            this.listOfFreeCards.replace(name,listOfFreeCards.get(name)+number);
+        }
+        else{
+            listOfFreeCards.put(name,number);
+        }
     }
 
-    public void addDeck(String name, int deckNumber) {
+    public void removeCard(String name , int number){
+        if(listOfFreeCards.get(name) == 1 ){
+            listOfFreeCards.remove(name);
+        }else {
+            listOfFreeCards.replace(name,listOfFreeCards.get(name)-number);
+        }
+    }
+
+    public void addDeck(String name) {
         this.listOfDeck.add(name);
+    }
+
+    public  String[] getDecksOfThisPlayer(){
+        String list[] = new String[listOfDeck.size()];
+        list = listOfDeck.toArray(list);
+        return list;
+    }
+
+    public boolean doesHaveThiscard(String name){
+        return listOfFreeCards.containsKey(name);
+    }
+
+    public boolean doesHaveThisDeck(String deckName){
+        for (String name : listOfDeck){
+            if(deckName.contentEquals(name))
+                return   true;
+        }
+        return false;
+    }
+
+    public String[] AllCardList(){
+        ArrayList<String> list = new ArrayList<>();
+        for (String name:
+             listOfFreeCards.keySet()) {
+            list.add(name);
+        }
+        String[] decks = getDecksOfThisPlayer();
+        for (int i = 0; i < decks.length ; i++) {
+            Deck deck = Deck.getDeckByName(decks[i]);
+            HashMap<String, Integer> mainDeck = deck.getMainDeck();
+            HashMap<String, Integer> sideDeck = deck.getSideDeck();
+            for (String name:
+                 mainDeck.keySet()) {
+                if(!list.contains(name)){
+                    list.add(name);
+                }
+            }
+            for (String name:
+                    sideDeck.keySet()) {
+                if(!list.contains(name)){
+                    list.add(name);
+                }
+            }
+        }
+        String []array = new String[list.size()];
+        array = list.toArray(array);
+        Arrays.sort(array,String.CASE_INSENSITIVE_ORDER);
+        return array;
+
     }
 
     public static void main(String[] args) {

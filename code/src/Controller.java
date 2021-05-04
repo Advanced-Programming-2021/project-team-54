@@ -20,6 +20,8 @@ public class Controller {
                 case 5:
                     Scoreboard.scoreboardControl(input);
                     break;
+                case 4:
+                    Deck.DeckControll(input,Mainmenu.player);
             }
         }
     }

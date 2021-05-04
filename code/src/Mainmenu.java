@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class Mainmenu {
 public static Player player;
 public  static void mainMenuController(String input){
-    Pattern enterMenuRegex = Pattern.compile("menu enter menu enter (Duel|Deck|Scoreboard|Profile|Shop)");
+    Pattern enterMenuRegex = Pattern.compile("menu enter (Duel|Deck|Scoreboard|Profile|Shop)");
     Matcher matcher = enterMenuRegex.matcher(input);
     if (matcher.find()){
         enterMenu(matcher);

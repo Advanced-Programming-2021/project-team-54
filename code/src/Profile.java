@@ -103,13 +103,14 @@ public class Profile {
         player.updateInjsonFile();
         System.out.println("password changed successfully!");
     }
+
     public static void enterMenu(){
         System.out.println("menu navigation is not possible");
     }
     public static void exit(){
-           Controller.menuNumber = 2;
+        Controller.menuNumber = 2;
     }
     public static void showCurrentMenu(){
-        System.out.println("Profile");
+        System.out.println("Deck");
     }
 }
