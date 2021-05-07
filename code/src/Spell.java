@@ -38,11 +38,4 @@ public class Spell extends Card{
         }
         return new Spell("","",0);
     }
-
-    public static void main(String[] args) {
-        Spell spell = new Spell("sam" , "koshande" , 1);
-        spell.addThisCardFile();
-
-        //System.out.println(card.getCardDescription());
-    }
 }

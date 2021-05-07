@@ -63,11 +63,6 @@ public class Profile {
         patternsArray = patterns.toArray(patternsArray);
         return patternsArray;
     }
-    public static void main(String[] args) {
-        Player player = Player.getPlayerByUsername("amir");
-        profileControl(player,"profile change --password --current 1234 --new ss");
-
-    }
     public  static boolean haveThisStrChangepassPattern(String input){
         String[] patterns = changePasswordPatterns();
         for (String patter:

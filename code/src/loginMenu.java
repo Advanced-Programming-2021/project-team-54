@@ -36,13 +36,6 @@ public class loginMenu {
         }
         System.out.println("invalid command");
     }
-    public static void main(String[] args) {
-        InputStream src;
-        Scanner scanner = new Scanner(System.in);
-        String u = scanner.nextLine();
-        loginMenuRun(u);
-    }
-
     public static void signingUp(String input) {
         ArrayList<String> patterns = signupPatterns();
         Matcher matcher = Pattern.compile("").matcher("");
@@ -171,7 +164,7 @@ public class loginMenu {
             return ;
         }
         System.out.println("user logged in successfully!");
-        Mainmenu.player = player;
+        MainMenu.player = player;
         Controller.menuNumber = 2;
     }
 }

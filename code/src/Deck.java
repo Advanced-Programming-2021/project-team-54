@@ -594,13 +594,4 @@ public class Deck {
         System.out.println("Deck");
     }
 
-    public static void main(String[] args) {
-
-        //System.out.println(addCardToDeckPatterns()[7]);
-        ArrayList<String> list = new ArrayList<>();
-        list.add("amir");
-        list.add("mobin");
-        list.add("arad");
-        System.out.println(list.contains(""));
-    }
 }

@@ -33,7 +33,6 @@ public class Player {
     public void updateInjsonFile() {
         createPlayerJsonFile(this);
     }
-
     public static boolean createPlayerJsonFile(Player player) {
         JSONObject playerDetails = new JSONObject();
         playerDetails.put("username", player.username);
@@ -123,24 +122,29 @@ public class Player {
     }
 
     public static boolean isThereThisNickname(String nickname) {
-        String[] pathnames;
+        String[] pathnames=new String[100];
         File file = new File(System.getProperty("user.dir") + "\\src\\users");
         pathnames = file.list();
+     //   System.out.println(System.getProperty("user.dir") + "\\users");
+        if(pathnames.length == 0){
+            System.out.println("Hello!");
+        } else {
+            for (String string : pathnames) {
 
-        for (String string : pathnames) {
+                JSONParser jsonParser = new JSONParser();
+                File userfile = new File(System.getProperty("user.dir") + "\\src\\users\\" + string);
+                try (FileReader fileReader = new FileReader(userfile)) {
 
-            JSONParser jsonParser = new JSONParser();
-            File userfile = new File(System.getProperty("user.dir") + "\\src\\users\\" + string);
-            try (FileReader fileReader = new FileReader(userfile)) {
+                    JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
+                    if (nickname.contentEquals((String) jsonObject.get("nickname")))
+                        return true;
+                } catch (Exception e) {
 
-                JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
-                if (nickname.contentEquals((String) jsonObject.get("nickname")))
-                    return true;
-            } catch (Exception e) {
-
+                }
             }
         }
-        return false;
+            return false;
+
     }
 
     public void setUsername(String name) {
@@ -251,13 +255,5 @@ public class Player {
         Arrays.sort(array,String.CASE_INSENSITIVE_ORDER);
         return array;
 
-    }
-
-    public static void main(String[] args) {
-        Player player = new Player("mobin", "12", 0, "mobin", 0);
-         createPlayerJsonFile(player);
-        //System.out.println(isThereThisNickname("jafar"));
-       // player = getPlayerByUsername("amir");
-        //System.out.println(player.listOfFreeCards.get("zzz"));
     }
 }
