@@ -1,3 +1,5 @@
+package Card;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -39,7 +41,7 @@ public class Card {
         return cardName;
     }
 
-//    public static Card getCardByName(String name){
+//    public static Card.Card getCardByName(String name){
 //        String currentState = System.getProperty("user.dir");
 //        File usersFile = new File(currentState + "\\users\\" + name + ".json");
 //        JSONParser jsonParser = new JSONParser();
@@ -49,12 +51,12 @@ public class Card {
 //            JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
 //            String username = (String)jsonObject.get("name");
 //            String description = (String)jsonObject.get("description");
-//            return new Card(username  , description);
+//            return new Card.Card(username  , description);
 //
 //
 //
 //        } catch (Exception e) {
-//            return new Card("null"  , "null");
+//            return new Card.Card("null"  , "null");
 //        }
 //
 //    }

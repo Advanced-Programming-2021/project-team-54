@@ -1,8 +1,8 @@
+import Card.Card;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -565,7 +565,7 @@ public class Deck {
             }
 
         }
-        System.out.println("Spell and Traps:");
+        System.out.println("Card.Spell and Traps:");
         for (int i = 0; i < cardNames.length; i++) {
             Card card = Card.getCardByName(cardNames[i]);
             if (card.getCardKind() > 1) {

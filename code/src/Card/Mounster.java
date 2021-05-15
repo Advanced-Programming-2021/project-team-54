@@ -1,9 +1,12 @@
+package Card;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class Mounster extends Card {
     private int attackPower;
@@ -51,4 +54,9 @@ public class Mounster extends Card {
         }
         return new Mounster("","",0,0,0,0);
     }
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        Mounster mounster = new Mounster(scanner.nextLine(),)
+//    }
 }
