@@ -14,6 +14,18 @@ public class Card {
         this.cardDescription = cardDescription;
         this.cardKind = cardKind;
     }
+    enum State{
+        OO,DO,DH,O,H;
+    }
+    private State state;
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState(){
+        return this.state;
+    }
 
     public void setCardDescription(String cardDescription) {
         this.cardDescription = cardDescription;
@@ -39,25 +51,6 @@ public class Card {
         return cardName;
     }
 
-//    public static Card getCardByName(String name){
-//        String currentState = System.getProperty("user.dir");
-//        File usersFile = new File(currentState + "\\users\\" + name + ".json");
-//        JSONParser jsonParser = new JSONParser();
-//
-//        try (FileReader fileReader = new FileReader(usersFile)) {
-//
-//            JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
-//            String username = (String)jsonObject.get("name");
-//            String description = (String)jsonObject.get("description");
-//            return new Card(username  , description);
-//
-//
-//
-//        } catch (Exception e) {
-//            return new Card("null"  , "null");
-//        }
-//
-//    }
 
     public static Card getCardByName(String name){
         File file = new File(System.getProperty("user.dir")+"\\src\\cards\\"+name+".json");

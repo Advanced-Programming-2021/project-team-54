@@ -6,9 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Mounster extends Card {
+
     private int attackPower;
     private int defencePower;
     private int level;
+
+
 
     Mounster(String name, String description, int cardKind, int attackPower, int defencePower, int level) {
         super(name, description, cardKind);
@@ -39,6 +42,7 @@ public class Mounster extends Card {
         }
     }
 
+
     public static Mounster getMounsterByName(String name) {
         File file = new File(System.getProperty("user.dir") + "\\src\\cards\\" + name + ".json");
         JSONParser jsonParser = new JSONParser();
@@ -55,8 +59,13 @@ public class Mounster extends Card {
         return new Mounster("","",0,0,0,0);
     }
 
+    public int getLevel(){
+        return level;
+    }
+
     public static void main(String[] args) {
-        Mounster mounster = new Mounster("Teramp","pool",1,3000,600,7);
+        Card mounster = new Mounster("Tkakakak","pool",1,3000,600,7);
+
         mounster.addThisCardFile();
     }
 }

@@ -21,6 +21,8 @@ public class Player {
     private HashMap<String, Integer> listOfFreeCards = new HashMap<>();
     private ArrayList<String> listOfDeck = new ArrayList<>();
 
+    private Gameboard gameboard ;
+
     public Player(String name, String password, int score, String nikname, int money) {
         this.username = name;
         this.password = password;
@@ -30,6 +32,12 @@ public class Player {
 
     }
 
+    public void setGameboard(Gameboard gameboard){
+        this.gameboard = gameboard;
+    }
+    public Gameboard getGameboard(){
+        return this.gameboard;
+    }
     public void updateInjsonFile() {
         createPlayerJsonFile(this);
     }
@@ -70,7 +78,24 @@ public class Player {
 
     }
 
+    public Deck getActiveDeck(){
+        for (String name:
+             listOfDeck) {
+            Deck deck = Deck.getDeckByName(name);
+            if(deck.getisActive())
+                return deck;
+        }
+        return new Deck("null",new HashMap<String, Integer>(),new HashMap<String, Integer>());
+    }
 
+    public boolean doeshaveActiveDeck(){
+        for(String deckName : listOfDeck){
+            Deck deck =Deck.getDeckByName(deckName);
+            if(deck.getisActive())
+                return true;
+        }
+        return false;
+    }
 
     public void deleteDeck(String name){
         int i = 0 ;

@@ -100,6 +100,10 @@ public class Deck {
         return counter;
     }
 
+    public boolean getisActive() {
+        return isActive;
+    }
+
     public String[] convertCardListToArray(int mainOrside) {
         ArrayList<String> list = new ArrayList<>();
         if (mainOrside == 1) {
@@ -124,6 +128,10 @@ public class Deck {
         return counter;
     }
 
+    public  String getName(){
+        return this.name;
+    }
+
     public int numberOfThisCardInDeck(String name) {
         int counter = 0;
         if (mainDeck.containsKey(name))
@@ -131,6 +139,13 @@ public class Deck {
         if (sideDeck.containsKey(name))
             counter += sideDeck.get(name);
         return counter;
+    }
+
+    public HashMap<String , Integer> getMaindeck(){
+        return  mainDeck;
+    }
+    public HashMap<String , Integer> getSidedeck(){
+        return sideDeck;
     }
 
     public void removeCardFromMaindeck(String cardName) {
@@ -219,10 +234,10 @@ public class Deck {
         JSONParser jsonParser = new JSONParser();
         HashMap<String, Integer> mainDeck = new HashMap<>();
         HashMap<String, Integer> sideDeck = new HashMap<>();
-        String name = "null";
+        String name =""+ deckName;
         try (FileReader fileReader = new FileReader(file);) {
             JSONObject mainObj = (JSONObject) jsonParser.parse(fileReader);
-            name = (String) mainObj.get("name");
+
             JSONArray mainlist = (JSONArray) mainObj.get("maindeck");
             JSONArray sidelist = (JSONArray) mainObj.get("sidedeck");
             for (Object obj : mainlist) {
