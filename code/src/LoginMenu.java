@@ -4,9 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.print.DocFlavor.STRING;
-
-public class loginMenu {
+public class LoginMenu {
     public static void loginMenuRun(String input) {
         if(haveSignupPattern(input, signupPatterns())){
             signingUp(input);
@@ -171,7 +169,7 @@ public class loginMenu {
             return ;
         }
         System.out.println("user logged in successfully!");
-        Mainmenu.player = player;
+        MainMenu.player = player;
         Controller.menuNumber = 2;
     }
 }

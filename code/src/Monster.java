@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class Mounster extends Card {
+public class Monster extends Card {
 
     private int attackPower;
     private int defencePower;
@@ -13,7 +13,7 @@ public class Mounster extends Card {
 
 
 
-    Mounster(String name, String description, int cardKind, int attackPower, int defencePower, int level) {
+    Monster(String name, String description, int cardKind, int attackPower, int defencePower, int level) {
         super(name, description, cardKind);
         this.attackPower = attackPower;
         this.defencePower = defencePower;
@@ -43,7 +43,7 @@ public class Mounster extends Card {
     }
 
 
-    public static Mounster getMounsterByName(String name) {
+    public static Monster getMounsterByName(String name) {
         File file = new File(System.getProperty("user.dir") + "\\src\\cards\\" + name + ".json");
         JSONParser jsonParser = new JSONParser();
         try (FileReader fileReader = new FileReader(file);) {
@@ -53,10 +53,10 @@ public class Mounster extends Card {
             int attack = Integer.parseInt((String) obj.get("attack"));
             int defence = Integer.parseInt((String) obj.get("defence"));
             int level = Integer.parseInt((String) obj.get("level"));
-            return  new Mounster(name,description,kind,attack,defence,level);
+            return  new Monster(name,description,kind,attack,defence,level);
         } catch (Exception e) {
         }
-        return new Mounster("","",0,0,0,0);
+        return new Monster("","",0,0,0,0);
     }
 
     public int getLevel(){
@@ -64,7 +64,7 @@ public class Mounster extends Card {
     }
 
     public static void main(String[] args) {
-        Card mounster = new Mounster("Tkakakak","pool",1,3000,600,7);
+        Card mounster = new Monster("Tkakakak","pool",1,3000,600,7);
 
         mounster.addThisCardFile();
     }

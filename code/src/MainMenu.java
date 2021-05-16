@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Mainmenu {
+public class MainMenu {
 public static Player player;
 public  static void mainMenuController(String input){
     Pattern enterMenuRegex = Pattern.compile("menu enter (Duel|Deck|Scoreboard|Profile|Shop)");

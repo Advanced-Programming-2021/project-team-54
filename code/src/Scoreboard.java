@@ -74,9 +74,9 @@ public class Scoreboard {
             return true;
         if (firstPlayer.getScore() < secondPlayer.getScore())
             return false;
-        String[] list = {firstPlayer.getNikname(), secondPlayer.getNikname()};
+        String[] list = {firstPlayer.getNikName(), secondPlayer.getNikName()};
         Arrays.sort(list, String.CASE_INSENSITIVE_ORDER);
-        if (list[0].contentEquals(firstPlayer.getNikname()))
+        if (list[0].contentEquals(firstPlayer.getNikName()))
             return true;
         return false;
     }
@@ -85,12 +85,12 @@ public class Scoreboard {
         if (i == players.length)
             return;
         if (i == 0) {
-            System.out.println(rank + "- " + players[i].getNikname() + ": " + players[i].getScore());
+            System.out.println(rank + "- " + players[i].getNikName() + ": " + players[i].getScore());
             printList(players, i + 1, rank);
         } else {
             if (players[i].getScore() != players[i - 1].getScore())
                 rank++;
-            System.out.println(rank + "- " + players[i].getNikname() + ": " + players[i].getScore());
+            System.out.println(rank + "- " + players[i].getNikName() + ": " + players[i].getScore());
             printList(players, i + 1, rank);
         }
 

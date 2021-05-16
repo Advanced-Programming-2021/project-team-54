@@ -40,15 +40,15 @@ public class Profile {
             System.out.println("user with nickname "+newNickname+" already exists");
             return;
         }
-        player.setNikname(newNickname);
-        player.updateInjsonFile();
+        player.setNickname(newNickname);
+        player.updateInJsonFile();
         System.out.println("nickname changed successfully!");
 
     }
     public static boolean isNicknameAlreadyExist(String nickname){
         Player[] players = Scoreboard.getListOFPlayers();
         for(Player player:players){
-            if(nickname.contentEquals(player.getNikname()))
+            if(nickname.contentEquals(player.getNikName()))
                 return true;
         }
         return  false;
@@ -58,7 +58,7 @@ public class Profile {
         String staticstr = "profile change";
         boolean[]b = new boolean[3];
         ArrayList<String > patterns = new ArrayList<>();
-        loginMenu.patternmaker(components,staticstr,b,patterns);
+        LoginMenu.patternmaker(components,staticstr,b,patterns);
         String[] patternsArray = new String[patterns.size()];
         patternsArray = patterns.toArray(patternsArray);
         return patternsArray;
@@ -100,7 +100,7 @@ public class Profile {
             return;
         }
         player.setPassword(newPass);
-        player.updateInjsonFile();
+        player.updateInJsonFile();
         System.out.println("password changed successfully!");
     }
 

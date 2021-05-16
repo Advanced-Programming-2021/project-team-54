@@ -60,7 +60,7 @@ public class Card {
             String description = (String) obj.get("description");
             int kind = Integer.parseInt((String) obj.get("kind"));
             if (kind == 1)
-                return Mounster.getCardByName(name);
+                return Monster.getCardByName(name);
             if(kind == 2)
                 return Spell.getCardByName(name);
             if(kind == 3)

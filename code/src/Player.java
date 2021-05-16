@@ -1,12 +1,9 @@
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,29 +13,29 @@ public class Player {
     private String username;
     private String password;
     private int score;
-    private String nikname;
+    private String nickname;
     private int money;
     private HashMap<String, Integer> listOfFreeCards = new HashMap<>();
     private ArrayList<String> listOfDeck = new ArrayList<>();
 
-    private Gameboard gameboard ;
+    private GameBoard gameboard ;
 
-    public Player(String name, String password, int score, String nikname, int money) {
+    public Player(String name, String password, int score, String nickname, int money) {
         this.username = name;
         this.password = password;
         this.score = score;
-        this.nikname = nikname;
+        this.nickname = nickname;
         this.money = money;
 
     }
 
-    public void setGameboard(Gameboard gameboard){
+    public void setGameBoard(GameBoard gameboard){
         this.gameboard = gameboard;
     }
-    public Gameboard getGameboard(){
+    public GameBoard getGameBoard(){
         return this.gameboard;
     }
-    public void updateInjsonFile() {
+    public void updateInJsonFile() {
         createPlayerJsonFile(this);
     }
 
@@ -46,23 +43,23 @@ public class Player {
         JSONObject playerDetails = new JSONObject();
         playerDetails.put("username", player.username);
         playerDetails.put("password", player.password);
-        playerDetails.put("nickname", player.nikname);
+        playerDetails.put("nickname", player.nickname);
         playerDetails.put("score", player.score + "");
         playerDetails.put("money", player.money + "");
         JSONArray cardArray = new JSONArray();
 
         for (String cardName : player.listOfFreeCards.keySet()) {
-            JSONObject cardobj = new JSONObject();
-            cardobj.put("cardname", cardName);
-            cardobj.put("number", player.listOfFreeCards.get(cardName) + "");
-            cardArray.add(cardobj);
+            JSONObject cardObj = new JSONObject();
+            cardObj.put("cardname", cardName);
+            cardObj.put("number", player.listOfFreeCards.get(cardName) + "");
+            cardArray.add(cardObj);
         }
         playerDetails.put("cards", cardArray);
         JSONArray deckArray = new JSONArray();
         for (String deckName : player.listOfDeck) {
-            JSONObject deckobj = new JSONObject();
-            deckobj.put("deckname", deckName);
-            deckArray.add(deckobj);
+            JSONObject deckObj = new JSONObject();
+            deckObj.put("deckname", deckName);
+            deckArray.add(deckObj);
         }
         playerDetails.put("decks", deckArray);
 
@@ -82,16 +79,16 @@ public class Player {
         for (String name:
              listOfDeck) {
             Deck deck = Deck.getDeckByName(name);
-            if(deck.getisActive())
+            if(deck.getIsActive())
                 return deck;
         }
         return new Deck("null",new HashMap<String, Integer>(),new HashMap<String, Integer>());
     }
 
-    public boolean doeshaveActiveDeck(){
+    public boolean checkActivationOfDeck(){
         for(String deckName : listOfDeck){
             Deck deck =Deck.getDeckByName(deckName);
-            if(deck.getisActive())
+            if(deck.getIsActive())
                 return true;
         }
         return false;
@@ -148,15 +145,15 @@ public class Player {
     }
 
     public static boolean isThereThisNickname(String nickname) {
-        String[] pathnames;
+        String[] pathNames;
         File file = new File(System.getProperty("user.dir") + "\\src\\users");
-        pathnames = file.list();
+        pathNames = file.list();
 
-        for (String string : pathnames) {
+        for (String string : pathNames) {
 
             JSONParser jsonParser = new JSONParser();
-            File userfile = new File(System.getProperty("user.dir") + "\\src\\users\\" + string);
-            try (FileReader fileReader = new FileReader(userfile)) {
+            File userFile = new File(System.getProperty("user.dir") + "\\src\\users\\" + string);
+            try (FileReader fileReader = new FileReader(userFile)) {
 
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
                 if (nickname.contentEquals((String) jsonObject.get("nickname")))
@@ -176,8 +173,8 @@ public class Player {
         this.money += amount;
     }
 
-    public void setNikname(String nikname) {
-        this.nikname = nikname;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void setPassword(String pass) {
@@ -196,8 +193,8 @@ public class Player {
         return this.password;
     }
 
-    public String getNikname() {
-        return this.nikname;
+    public String getNikName() {
+        return this.nickname;
     }
 
     public int getScore() {
@@ -235,7 +232,7 @@ public class Player {
         return list;
     }
 
-    public boolean doesHaveThiscard(String name){
+    public boolean doesHaveThisCard(String name){
         return listOfFreeCards.containsKey(name);
     }
 

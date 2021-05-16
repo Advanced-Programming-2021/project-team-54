@@ -3,27 +3,27 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Phase {
+public class BattleWave {
 
     private boolean setOrSummon;
-    private int phase = 0;
+    private int battleWave = 0;
     private Player self;
     private Player opponent;
     private ArrayList<Card> cardsThatSummonInThisPhases = new ArrayList<>();
     private ArrayList<Card> selectedCard = new ArrayList<>();
     private boolean changedposition;
 
-    public void setChangedposition(boolean changedposition) {
+    public void setChangedPosition(boolean changedPosition) {
         if(this.changedposition)
             return;
-        this.changedposition = changedposition;
+        this.changedposition = changedPosition;
     }
 
-    public boolean getChangeposition(){
+    public boolean getChangePosition(){
         return changedposition;
     }
 
-    public Phase(Player opponent, Player self) {
+    public BattleWave(Player opponent, Player self) {
         this.opponent = opponent;
         this.self = self;
     }
@@ -59,8 +59,8 @@ public class Phase {
         }
     }
 
-    public int getPhase() {
-        return phase;
+    public int getBattleWave() {
+        return battleWave;
     }
 
     public Player getSelf() {
@@ -71,8 +71,8 @@ public class Phase {
         return opponent;
     }
 
-    public void setPhase(int phase) {
-        this.phase = phase;
+    public void setBattleWave(int battleWave) {
+        this.battleWave = battleWave;
     }
 
     public void setSelf(Player self) {
@@ -100,11 +100,11 @@ public class Phase {
             System.out.println("you can’t summon this card");
             return;
         }
-        if(phase!=2&&phase!=4){
+        if(battleWave !=2&& battleWave !=4){
             System.out.println("action not allowed in this phase");
             return;
         }
-        if(self.getGameboard().getNumberOfMonsterField()==5){
+        if(self.getGameBoard().getNumberOfMonsterField()==5){
             System.out.println("monster card zone is full");
             return;
         }
@@ -112,10 +112,10 @@ public class Phase {
             System.out.println("you already summoned/set on this turn");
             return;
         }
-        Mounster mounster = (Mounster) selectedCard.get(0);
-        if(mounster.getLevel()<=4){
-            self.getGameboard().putMonsterInMonsterfield(selectedCard.get(0));
-            self.getGameboard().removeCardFromHand(selectedCard.get(0));
+        Monster monster = (Monster) selectedCard.get(0);
+        if(monster.getLevel()<=4){
+            self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
+            self.getGameBoard().removeCardFromHand(selectedCard.get(0));
             setSetOrSummon(true);
             selectedCard.get(0).setState(Card.State.OO);
             System.out.println("summoned successfully");
@@ -123,21 +123,21 @@ public class Phase {
             return;
 
         }
-        if(mounster.getLevel()==5||mounster.getLevel()==6){
-            if(self.getGameboard().getNumberOfMonsterField()<1){
+        if(monster.getLevel()==5|| monster.getLevel()==6){
+            if(self.getGameBoard().getNumberOfMonsterField()<1){
                 System.out.println("there are not enough cards for tribute");
                 return;
             }
             while (true){
                 System.out.println("please write the number of monster that you want to tribute");
                 int number = Integer.parseInt(Controller.scanner.nextLine());
-                if(!self.getGameboard().getMounsterField().containsKey(number)){
+                if(!self.getGameBoard().getMounsterField().containsKey(number)){
                     System.out.println("there no monsters one this address");
                     continue;
                 }
-                self.getGameboard().sendCardToGrave(self.getGameboard().getMounsterField().get(number));
-                self.getGameboard().removeMonsterFromMonsterField(number);
-                self.getGameboard().putMonsterInMonsterfield(selectedCard.get(0));
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(number));
+                self.getGameBoard().removeMonsterFromMonsterField(number);
+                self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
                 System.out.println("summoned successfully");
                 setSetOrSummon(true);
                 selectedCard.get(0).setState(Card.State.OO);
@@ -146,8 +146,8 @@ public class Phase {
             }
 
         }
-        if(mounster.getLevel()>=7){
-            if(self.getGameboard().getNumberOfMonsterField()<2){
+        if(monster.getLevel()>=7){
+            if(self.getGameBoard().getNumberOfMonsterField()<2){
                 System.out.println("there are not enough cards for tribute");
                 return;
             }
@@ -155,15 +155,15 @@ public class Phase {
                 System.out.println("please write the number of monsters that you want to tribute");
                 int num1 = Controller.scanner.nextInt();
                 int num2 = Controller.scanner.nextInt();
-                if(!self.getGameboard().getMounsterField().containsKey(num1)||!self.getGameboard().getMounsterField().containsKey(num2)){
+                if(!self.getGameBoard().getMounsterField().containsKey(num1)||!self.getGameBoard().getMounsterField().containsKey(num2)){
                     System.out.println("there no monsters one this address");
                     continue;
                 }
-                self.getGameboard().sendCardToGrave(self.getGameboard().getMounsterField().get(num1));
-                self.getGameboard().removeMonsterFromMonsterField(num1);
-                self.getGameboard().sendCardToGrave(self.getGameboard().getMounsterField().get(num2));
-                self.getGameboard().removeMonsterFromMonsterField(num2);
-                self.getGameboard().putMonsterInMonsterfield(selectedCard.get(0));
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(num1));
+                self.getGameBoard().removeMonsterFromMonsterField(num1);
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(num2));
+                self.getGameBoard().removeMonsterFromMonsterField(num2);
+                self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
                 setSetOrSummon(true);
                 System.out.println("summoned successfully");
                 cardsThatSummonInThisPhases.add(selectedCard.get(0));
@@ -200,7 +200,7 @@ public class Phase {
             System.out.println("you can’t change this card position");
             return;
         }
-        if(phase!=2&&phase!=4){
+        if(battleWave !=2&& battleWave !=4){
             System.out.println("you can’t do this action in this phase");
             return;
         }
@@ -220,7 +220,7 @@ public class Phase {
         selectedCard.get(0).setState(Card.State.OO);
         if(state.contentEquals("defense"))
             selectedCard.get(0).setState(Card.State.DO);
-        setChangedposition(true);
+        setChangedPosition(true);
         System.out.println("monster card position changed successfully");
 
     }
@@ -234,7 +234,7 @@ public class Phase {
             System.out.println("you can’t change this card position");
             return;
         }
-        if(phase!=2&&phase!=4){
+        if(battleWave !=2&& battleWave !=4){
             System.out.println("you can’t do this action in this phase");
             return;
         }
@@ -251,7 +251,7 @@ public class Phase {
 
     public boolean isSelectedCardInhand() {
         Card card = selectedCard.get(0);
-        ArrayList<Card> Cards = self.getGameboard().getInHandCard();
+        ArrayList<Card> Cards = self.getGameBoard().getInHandCard();
         for (Card card1 : Cards) {
             if (card1 == card)
                 return true;
@@ -261,7 +261,7 @@ public class Phase {
 
     public boolean isSelectedCardInMonsterField(){
         Card card = selectedCard.get(0);
-        HashMap<Integer, Card> field= self.getGameboard().getMounsterField();
+        HashMap<Integer, Card> field= self.getGameBoard().getMounsterField();
         for (Integer i : field.keySet()) {
             if (field.get(i) == card)
                 return true;

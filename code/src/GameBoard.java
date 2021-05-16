@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Gameboard {
+public class GameBoard {
 
     private int lp;
     private HashMap<String, Integer> mainDeck;
@@ -13,7 +13,7 @@ public class Gameboard {
     private ArrayList<Card> inHandCard = new ArrayList<>();
     private ArrayList<Card> fieldZoneCard = new ArrayList<>();
 
-    public Gameboard(Deck deck, int lp) {
+    public GameBoard(Deck deck, int lp) {
         this.lp = lp;
         this.mainDeck = new HashMap<>(deck.getMainDeck());
         this.sideDeck = new HashMap<>(deck.getSideDeck());

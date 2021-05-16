@@ -43,7 +43,7 @@ public class PlayGame {
         String[] cotents = {" --second-player (?<name>[\\S]+)", " --rounds (?<number>[\\d]+)"};
         String staticstr = "duel new";
         ArrayList<String> list = new ArrayList<>();
-        loginMenu.patternmaker(cotents, staticstr, b, list);
+        LoginMenu.patternmaker(cotents, staticstr, b, list);
         String[] pat = new String[2];
         pat = list.toArray(pat);
         return pat;
@@ -69,8 +69,8 @@ public class PlayGame {
     }
 
     public static void topShow(Player player) {
-        Gameboard gameboard = player.getGameboard();
-        System.out.println(player.getNikname() + " : " + gameboard.getLp());
+        GameBoard gameboard = player.getGameBoard();
+        System.out.println(player.getNikName() + " : " + gameboard.getLp());
         System.out.print("    ");
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
@@ -147,7 +147,7 @@ public class PlayGame {
     }
 
     public static void downShow(Player player) {
-        Gameboard gameboard = player.getGameboard();
+        GameBoard gameboard = player.getGameBoard();
 
         System.out.print(gameboard.getNumberOfGrave() + "                      " + gameboard.getNumberOfFieldZone() + "\n    ");
         HashMap<Integer, Card> list = new HashMap<>(gameboard.getMounsterField());
@@ -226,7 +226,7 @@ public class PlayGame {
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
         }
-        System.out.println(player.getNikname() + " : " + gameboard.getLp());
+        System.out.println(player.getNikName() + " : " + gameboard.getLp());
 
     }
 
@@ -239,12 +239,12 @@ public class PlayGame {
             return;
         }
         opponent = Player.getPlayerByUsername(opponentName);
-        Player self = Mainmenu.player;
-        if (!self.doeshaveActiveDeck()) {
+        Player self = MainMenu.player;
+        if (!self.checkActivationOfDeck()) {
             System.out.println(self.getUsername() + " has no active deck");
             return;
         }
-        if (!opponent.doeshaveActiveDeck()) {
+        if (!opponent.checkActivationOfDeck()) {
             System.out.println(opponentName + " has no active deck");
             return;
         }
@@ -261,8 +261,8 @@ public class PlayGame {
             System.out.println("number of rounds is not supported");
             return;
         }
-        self.setGameboard(new Gameboard(self.getActiveDeck(), 1000));
-        opponent.setGameboard(new Gameboard(opponent.getActiveDeck(), 1000));
+        self.setGameBoard(new GameBoard(self.getActiveDeck(), 1000));
+        opponent.setGameBoard(new GameBoard(opponent.getActiveDeck(), 1000));
         duelInProccess = true;
 
     }
@@ -277,7 +277,7 @@ public class PlayGame {
         return matcher;
     }
 
-    public static int finalCardSelection(String input, Player self, Player opponent, Phase phase) {
+    public static int finalCardSelection(String input, Player self, Player opponent, BattleWave battleWave) {
         Card card;
         String[] patterns = selectionPatterns();
         int part = doesHaveSelectionPatterns(input);
@@ -287,8 +287,8 @@ public class PlayGame {
                 int number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (self.getGameboard().getMounsterField().containsKey(number)) {
-                    card = self.getGameboard().getMounsterField().get(number);
+                if (self.getGameBoard().getMounsterField().containsKey(number)) {
+                    card = self.getGameBoard().getMounsterField().get(number);
                     return 2;
                 } else return 3;
             case 1:
@@ -296,9 +296,9 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameboard().getMounsterField().containsKey(number)) {
-                    card = opponent.getGameboard().getMounsterField().get(number);
-                    phase.selecting(card);
+                if (opponent.getGameBoard().getMounsterField().containsKey(number)) {
+                    card = opponent.getGameBoard().getMounsterField().get(number);
+                    battleWave.selecting(card);
                     return 2;
                 } else return 3;
             case 2:
@@ -306,9 +306,9 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameboard().getMounsterField().containsKey(number)) {
-                    card = opponent.getGameboard().getMounsterField().get(number);
-                    phase.selecting(card);
+                if (opponent.getGameBoard().getMounsterField().containsKey(number)) {
+                    card = opponent.getGameBoard().getMounsterField().get(number);
+                    battleWave.selecting(card);
                     return 2;
                 } else return 3;
             case 3:
@@ -316,8 +316,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (self.getGameboard().getSpelltrapField().containsKey(number)) {
-                    phase.selecting(self.getGameboard().getMounsterField().get(number));
+                if (self.getGameBoard().getSpelltrapField().containsKey(number)) {
+                    battleWave.selecting(self.getGameBoard().getMounsterField().get(number));
                     return 2;
                 } else return 3;
             case 4:
@@ -325,8 +325,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameboard().getSpelltrapField().containsKey(number)) {
-                    phase.selecting(opponent.getGameboard().getMounsterField().get(number));
+                if (opponent.getGameBoard().getSpelltrapField().containsKey(number)) {
+                    battleWave.selecting(opponent.getGameBoard().getMounsterField().get(number));
                     return 2;
                 } else return 3;
             case 5:
@@ -334,27 +334,27 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameboard().getSpelltrapField().containsKey(number)) {
-                    phase.selecting(opponent.getGameboard().getMounsterField().get(number));
+                if (opponent.getGameBoard().getSpelltrapField().containsKey(number)) {
+                    battleWave.selecting(opponent.getGameBoard().getMounsterField().get(number));
                     return 2;
                 } else return 3;
             case 6:
-                if (self.getGameboard().getFieldZoneCard().size() == 0)
+                if (self.getGameBoard().getFieldZoneCard().size() == 0)
                     return 3;
-                phase.selecting(self.getGameboard().getFieldZoneCard().get(0));
+                battleWave.selecting(self.getGameBoard().getFieldZoneCard().get(0));
                 return 2;
             case 7:
             case 8:
-                if (opponent.getGameboard().getFieldZoneCard().size() == 0)
+                if (opponent.getGameBoard().getFieldZoneCard().size() == 0)
                     return 3;
-                phase.selecting(opponent.getGameboard().getFieldZoneCard().get(0));
+                battleWave.selecting(opponent.getGameBoard().getFieldZoneCard().get(0));
                 return 2;
             case 9:
                 matcher = givePatternTakeMatcher(input, patterns[9]);
                 number = Integer.parseInt(matcher.group(1));
-                if (number < 1 || number > self.getGameboard().getNumberOfInHandCard())
+                if (number < 1 || number > self.getGameBoard().getNumberOfInHandCard())
                     return 1;
-                phase.selecting(self.getGameboard().getInHandCard().get(number));
+                battleWave.selecting(self.getGameBoard().getInHandCard().get(number));
                 return 2;
             default:
                 return 0;
