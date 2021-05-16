@@ -5,22 +5,22 @@ import java.util.regex.Pattern;
 
 public class PlayGame {
     public static Player opponent;
-    public static boolean duelInProccess;
+    public static boolean duelInProcess;
 
     public static void controller(String input) {
-        if (duelInProccess) {
+        if (duelInProcess) {
 
         }
 
 
-        if (doeshaveCreateGamePatters(input)) {
+        if (doesHaveCreateGamePatters(input)) {
             makeGame(input);
             return;
 
         }
 
 
-        System.out.println("invalide command");
+        System.out.println("invalid command");
 
 
     }
@@ -40,16 +40,16 @@ public class PlayGame {
 
     public static String[] createGameRegexes() {
         boolean[] b = new boolean[2];
-        String[] cotents = {" --second-player (?<name>[\\S]+)", " --rounds (?<number>[\\d]+)"};
-        String staticstr = "duel new";
+        String[] contents = {" --second-player (?<name>[\\S]+)", " --rounds (?<number>[\\d]+)"};
+        String staticStr = "duel new";
         ArrayList<String> list = new ArrayList<>();
-        LoginMenu.patternmaker(cotents, staticstr, b, list);
+        LoginMenu.patternMaker(contents, staticStr, b, list);
         String[] pat = new String[2];
         pat = list.toArray(pat);
         return pat;
     }
 
-    public static boolean doeshaveCreateGamePatters(String input) {
+    public static boolean doesHaveCreateGamePatters(String input) {
         String[] patterns = createGameRegexes();
         for (String pattern :
                 patterns) {
@@ -60,9 +60,9 @@ public class PlayGame {
         return false;
     }
 
-    public static void showGameBoard(Player self, Player oppont) {
+    public static void showGameBoard(Player self, Player opponent) {
 
-        topShow(oppont);
+        topShow(opponent);
         System.out.println("----------------------------------------");
         downShow(self);
 
@@ -75,9 +75,9 @@ public class PlayGame {
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
         }
-        System.out.println("\n" + gameboard.getNumberOfMaindeck());
+        System.out.println("\n" + gameboard.getNumberOfMainDeck());
         System.out.print("    ");
-        HashMap<Integer, Card> list = new HashMap<>(gameboard.getSpelltrapField());
+        HashMap<Integer, Card> list = new HashMap<>(gameboard.getSpellTrapField());
         if (list.containsKey(4)) {
             Card card = list.get(4);
             if (card.getState() == Card.State.O) System.out.print("O");
@@ -108,7 +108,7 @@ public class PlayGame {
             else System.out.print("H");
         } else System.out.print("E");
         System.out.print("    " + "\n" + "    ");
-        list = new HashMap<>(gameboard.getMounsterField());
+        list = new HashMap<>(gameboard.getMonsterField());
         if (list.containsKey(4)) {
             Card card = list.get(4);
             if (card.getState() == Card.State.OO) System.out.print("OO  ");
@@ -150,7 +150,7 @@ public class PlayGame {
         GameBoard gameboard = player.getGameBoard();
 
         System.out.print(gameboard.getNumberOfGrave() + "                      " + gameboard.getNumberOfFieldZone() + "\n    ");
-        HashMap<Integer, Card> list = new HashMap<>(gameboard.getMounsterField());
+        HashMap<Integer, Card> list = new HashMap<>(gameboard.getMonsterField());
         if (list.containsKey(5)) {
             Card card = list.get(5);
             if (card.getState() == Card.State.OO) System.out.print("OO  ");
@@ -186,7 +186,7 @@ public class PlayGame {
             if (card.getState() == Card.State.DH) System.out.print("DH  ");
         } else System.out.print("E   ");
         System.out.print("\n" + "    ");
-        list = new HashMap<>(gameboard.getSpelltrapField());
+        list = new HashMap<>(gameboard.getSpellTrapField());
 
         if (list.containsKey(5)) {
             Card card = list.get(5);
@@ -222,7 +222,7 @@ public class PlayGame {
             if (card.getState() == Card.State.O) System.out.print("O");
             else System.out.print("H");
         } else System.out.print("E");
-        System.out.print("   \n                       " + gameboard.getNumberOfMaindeck() + "\n");
+        System.out.print("   \n                       " + gameboard.getNumberOfMainDeck() + "\n");
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
         }
@@ -263,7 +263,7 @@ public class PlayGame {
         }
         self.setGameBoard(new GameBoard(self.getActiveDeck(), 1000));
         opponent.setGameBoard(new GameBoard(opponent.getActiveDeck(), 1000));
-        duelInProccess = true;
+        duelInProcess = true;
 
     }
 
@@ -287,8 +287,8 @@ public class PlayGame {
                 int number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (self.getGameBoard().getMounsterField().containsKey(number)) {
-                    card = self.getGameBoard().getMounsterField().get(number);
+                if (self.getGameBoard().getMonsterField().containsKey(number)) {
+                    card = self.getGameBoard().getMonsterField().get(number);
                     return 2;
                 } else return 3;
             case 1:
@@ -296,8 +296,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameBoard().getMounsterField().containsKey(number)) {
-                    card = opponent.getGameBoard().getMounsterField().get(number);
+                if (opponent.getGameBoard().getMonsterField().containsKey(number)) {
+                    card = opponent.getGameBoard().getMonsterField().get(number);
                     battleWave.selecting(card);
                     return 2;
                 } else return 3;
@@ -306,8 +306,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameBoard().getMounsterField().containsKey(number)) {
-                    card = opponent.getGameBoard().getMounsterField().get(number);
+                if (opponent.getGameBoard().getMonsterField().containsKey(number)) {
+                    card = opponent.getGameBoard().getMonsterField().get(number);
                     battleWave.selecting(card);
                     return 2;
                 } else return 3;
@@ -316,8 +316,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (self.getGameBoard().getSpelltrapField().containsKey(number)) {
-                    battleWave.selecting(self.getGameBoard().getMounsterField().get(number));
+                if (self.getGameBoard().getSpellTrapField().containsKey(number)) {
+                    battleWave.selecting(self.getGameBoard().getMonsterField().get(number));
                     return 2;
                 } else return 3;
             case 4:
@@ -325,8 +325,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameBoard().getSpelltrapField().containsKey(number)) {
-                    battleWave.selecting(opponent.getGameBoard().getMounsterField().get(number));
+                if (opponent.getGameBoard().getSpellTrapField().containsKey(number)) {
+                    battleWave.selecting(opponent.getGameBoard().getMonsterField().get(number));
                     return 2;
                 } else return 3;
             case 5:
@@ -334,8 +334,8 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number > 5 || number < 1)
                     return 1;
-                if (opponent.getGameBoard().getSpelltrapField().containsKey(number)) {
-                    battleWave.selecting(opponent.getGameBoard().getMounsterField().get(number));
+                if (opponent.getGameBoard().getSpellTrapField().containsKey(number)) {
+                    battleWave.selecting(opponent.getGameBoard().getMonsterField().get(number));
                     return 2;
                 } else return 3;
             case 6:

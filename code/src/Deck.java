@@ -327,7 +327,7 @@ public class Deck {
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
         String ststicstr = "^deck add-card";
         ArrayList<String> p = new ArrayList<>();
-        LoginMenu.patternmaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, ststicstr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -336,7 +336,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        LoginMenu.patternmaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, ststicstr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 
@@ -470,7 +470,7 @@ public class Deck {
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
         String ststicstr = "^deck rm-card";
         ArrayList<String> p = new ArrayList<>();
-        LoginMenu.patternmaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, ststicstr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -479,7 +479,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        LoginMenu.patternmaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, ststicstr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 

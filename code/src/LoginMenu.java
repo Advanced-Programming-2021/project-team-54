@@ -29,7 +29,7 @@ public class LoginMenu {
             return;
         }
         if(haveLoginPattern(input, loginPatters())){
-            logingin(input);
+            loggingIn(input);
             return;
         }
         System.out.println("invalid command");
@@ -66,19 +66,19 @@ public class LoginMenu {
         System.out.println("user created successfully!");
     }
 
-    public static void patternmaker(String[] Components, String staticstr, boolean isUsed[],
-            ArrayList<String> patterns) {
+    public static void patternMaker(String[] Components, String staticStr, boolean isUsed[],
+                                    ArrayList<String> patterns) {
         for (int i = 0; i < isUsed.length; i++) {
             if (!isUsed[i]) {
-                staticstr += Components[i];
+                staticStr += Components[i];
                 isUsed[i] = true;
-                patternmaker(Components, staticstr, isUsed, patterns);
+                patternMaker(Components, staticStr, isUsed, patterns);
                 isUsed[i] = false;
-                staticstr = staticstr.substring(0, staticstr.length() - Components[i].length());
+                staticStr = staticStr.substring(0, staticStr.length() - Components[i].length());
             }
         }
         if (check(isUsed))
-            patterns.add(staticstr);
+            patterns.add(staticStr);
 
     }
 
@@ -103,13 +103,13 @@ public class LoginMenu {
 
     public static ArrayList<String> signupPatterns() {
         boolean b[] = new boolean[3];
-        String[] capturgroups = new String[3];
-        String staticstr = "user create";
-        capturgroups[0] = " --username (?<name>[\\S]+)";
-        capturgroups[1] = " --nickname (?<nick>[\\S]+)";
-        capturgroups[2] = " --password (?<pass>[\\S]+)";
+        String[] captureGroups = new String[3];
+        String staticStr = "user create";
+        captureGroups[0] = " --username (?<name>[\\S]+)";
+        captureGroups[1] = " --nickname (?<nick>[\\S]+)";
+        captureGroups[2] = " --password (?<pass>[\\S]+)";
         ArrayList<String> patterns = new ArrayList<>();
-        patternmaker(capturgroups, staticstr, b, patterns);
+        patternMaker(captureGroups, staticStr, b, patterns);
         return patterns;
     }
 
@@ -127,12 +127,12 @@ public class LoginMenu {
 
     public static ArrayList<String> loginPatters() {
         boolean[] b = new boolean[2];
-        String[] capturgroups = new String[2];
-        String staticstr = "user login";
-        capturgroups[0] = " --username (?<name>[\\S]+)";
-        capturgroups[1] = " --password (?<pass>[\\S]+)";
+        String[] captureGroups = new String[2];
+        String staticStr = "user login";
+        captureGroups[0] = " --username (?<name>[\\S]+)";
+        captureGroups[1] = " --password (?<pass>[\\S]+)";
         ArrayList<String> patterns = new ArrayList<>();
-        patternmaker(capturgroups, staticstr, b, patterns);
+        patternMaker(captureGroups, staticStr, b, patterns);
         return patterns;
     }
 
@@ -147,7 +147,7 @@ public class LoginMenu {
         
     }
 
-    public static void logingin(String input) {
+    public static void loggingIn(String input) {
 
         ArrayList<String> patterns = loginPatters();
         Matcher matcher = Pattern.compile("").matcher("");

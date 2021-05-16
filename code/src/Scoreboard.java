@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Scoreboard {
-    public static void showPlayerlist() {
+    public static void showPlayerList() {
         Player[] players = getListOFPlayers();
         sortListOfPlayers(players);
         printList(players, 0, 1);
@@ -15,7 +15,7 @@ public class Scoreboard {
         Pattern ShowScoreRegex = Pattern.compile("scoreboard show");
         Matcher matcher = ShowScoreRegex.matcher(input);
         if (matcher.find()) {
-            showPlayerlist();
+            showPlayerList();
             return;
         }
 
@@ -59,7 +59,7 @@ public class Scoreboard {
     public static void sortListOfPlayers(Player[] players) {
         for (int i = 0; i < players.length; i++) {
             for (int j = 0; j < players.length - 1; j++) {
-                if (playerCompair(players[j + 1], players[j])) {
+                if (playerCompare(players[j + 1], players[j])) {
                     Player p = players[j + 1];
                     players[j + 1] = players[j];
                     players[j] = p;
@@ -69,7 +69,7 @@ public class Scoreboard {
         }
     }
 
-    public static boolean playerCompair(Player firstPlayer, Player secondPlayer) {
+    public static boolean playerCompare(Player firstPlayer, Player secondPlayer) {
         if (firstPlayer.getScore() > secondPlayer.getScore())
             return true;
         if (firstPlayer.getScore() < secondPlayer.getScore())

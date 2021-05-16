@@ -114,7 +114,7 @@ public class BattleWave {
         }
         Monster monster = (Monster) selectedCard.get(0);
         if(monster.getLevel()<=4){
-            self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
+            self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
             self.getGameBoard().removeCardFromHand(selectedCard.get(0));
             setSetOrSummon(true);
             selectedCard.get(0).setState(Card.State.OO);
@@ -131,13 +131,13 @@ public class BattleWave {
             while (true){
                 System.out.println("please write the number of monster that you want to tribute");
                 int number = Integer.parseInt(Controller.scanner.nextLine());
-                if(!self.getGameBoard().getMounsterField().containsKey(number)){
+                if(!self.getGameBoard().getMonsterField().containsKey(number)){
                     System.out.println("there no monsters one this address");
                     continue;
                 }
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(number));
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(number));
                 self.getGameBoard().removeMonsterFromMonsterField(number);
-                self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
+                self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
                 System.out.println("summoned successfully");
                 setSetOrSummon(true);
                 selectedCard.get(0).setState(Card.State.OO);
@@ -155,15 +155,15 @@ public class BattleWave {
                 System.out.println("please write the number of monsters that you want to tribute");
                 int num1 = Controller.scanner.nextInt();
                 int num2 = Controller.scanner.nextInt();
-                if(!self.getGameBoard().getMounsterField().containsKey(num1)||!self.getGameBoard().getMounsterField().containsKey(num2)){
+                if(!self.getGameBoard().getMonsterField().containsKey(num1)||!self.getGameBoard().getMonsterField().containsKey(num2)){
                     System.out.println("there no monsters one this address");
                     continue;
                 }
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(num1));
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(num1));
                 self.getGameBoard().removeMonsterFromMonsterField(num1);
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMounsterField().get(num2));
+                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(num2));
                 self.getGameBoard().removeMonsterFromMonsterField(num2);
-                self.getGameBoard().putMonsterInMonsterfield(selectedCard.get(0));
+                self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
                 setSetOrSummon(true);
                 System.out.println("summoned successfully");
                 cardsThatSummonInThisPhases.add(selectedCard.get(0));
@@ -261,7 +261,7 @@ public class BattleWave {
 
     public boolean isSelectedCardInMonsterField(){
         Card card = selectedCard.get(0);
-        HashMap<Integer, Card> field= self.getGameBoard().getMounsterField();
+        HashMap<Integer, Card> field= self.getGameBoard().getMonsterField();
         for (Integer i : field.keySet()) {
             if (field.get(i) == card)
                 return true;

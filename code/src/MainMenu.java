@@ -16,8 +16,8 @@ public  static void mainMenuController(String input){
         exitMenu();
         return;
     }
-    Pattern showCurentMenuRegex = Pattern.compile("menu show-current");
-    matcher = showCurentMenuRegex.matcher(input);
+    Pattern showCurrentMenuRegex = Pattern.compile("menu show-current");
+    matcher = showCurrentMenuRegex.matcher(input);
     if(matcher.find()){
         showCurrentMenu();
         return;

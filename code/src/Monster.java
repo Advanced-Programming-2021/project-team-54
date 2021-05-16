@@ -43,7 +43,7 @@ public class Monster extends Card {
     }
 
 
-    public static Monster getMounsterByName(String name) {
+    public static Monster getMonsterByName(String name) {
         File file = new File(System.getProperty("user.dir") + "\\src\\cards\\" + name + ".json");
         JSONParser jsonParser = new JSONParser();
         try (FileReader fileReader = new FileReader(file);) {
@@ -63,9 +63,8 @@ public class Monster extends Card {
         return level;
     }
 
-    public static void main(String[] args) {
-        Card mounster = new Monster("Tkakakak","pool",1,3000,600,7);
-
-        mounster.addThisCardFile();
-    }
+//    public static void main(String[] args) {
+//        Card monster = new Monster("Tkakakak","pool",1,3000,600,7);
+//        monster.addThisCardFile();
+//    }
 }

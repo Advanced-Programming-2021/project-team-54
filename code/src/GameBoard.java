@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameBoard {
@@ -8,8 +7,8 @@ public class GameBoard {
     private HashMap<String, Integer> mainDeck;
     private HashMap<String, Integer> sideDeck;
     private ArrayList<String> grave = new ArrayList<>();
-    private HashMap<Integer, Card> mounsterField = new HashMap<>();
-    private HashMap<Integer, Card> spelltrapField = new HashMap<>();
+    private HashMap<Integer, Card> monsterField = new HashMap<>();
+    private HashMap<Integer, Card> spellTrapField = new HashMap<>();
     private ArrayList<Card> inHandCard = new ArrayList<>();
     private ArrayList<Card> fieldZoneCard = new ArrayList<>();
 
@@ -35,7 +34,7 @@ public class GameBoard {
         return inHandCard.size();
     }
 
-    public int getNumberOfMaindeck() {
+    public int getNumberOfMainDeck() {
         int counter = 0;
         for (String name : mainDeck.keySet()) {
             counter += mainDeck.get(name);
@@ -43,12 +42,12 @@ public class GameBoard {
         return counter;
     }
 
-    public HashMap<Integer, Card> getSpelltrapField() {
-        return this.spelltrapField;
+    public HashMap<Integer, Card> getSpellTrapField() {
+        return this.spellTrapField;
     }
 
-    public HashMap<Integer, Card> getMounsterField() {
-        return this.mounsterField;
+    public HashMap<Integer, Card> getMonsterField() {
+        return this.monsterField;
     }
 
     public int getNumberOfGrave() {
@@ -67,18 +66,18 @@ public class GameBoard {
     }
 
     public int getNumberOfMonsterField(){
-        return mounsterField.size();
+        return monsterField.size();
     }
-    public void putMonsterInMonsterfield(Card card){
+    public void putMonsterInMonsterField(Card card){
         for(int i = 1 ; i < 6 ; i++){
-            if(!mounsterField.containsKey(i)){
-                mounsterField.put(i,card);
+            if(!monsterField.containsKey(i)){
+                monsterField.put(i,card);
                 return;
             }
         }
     }
     public void removeMonsterFromMonsterField(int number){
-        mounsterField.remove(number);
+        monsterField.remove(number);
 
     }
     public void removeCardFromHand(Card card){

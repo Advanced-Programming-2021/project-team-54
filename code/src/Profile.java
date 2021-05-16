@@ -55,10 +55,10 @@ public class Profile {
     }
     public  static  String[] changePasswordPatterns(){
         String[] components = {" --password"," --current (?<currentpass>[\\S]+)"," --new (?<newpass>[\\S]+)"};
-        String staticstr = "profile change";
+        String staticStr = "profile change";
         boolean[]b = new boolean[3];
         ArrayList<String > patterns = new ArrayList<>();
-        LoginMenu.patternmaker(components,staticstr,b,patterns);
+        LoginMenu.patternMaker(components,staticStr,b,patterns);
         String[] patternsArray = new String[patterns.size()];
         patternsArray = patterns.toArray(patternsArray);
         return patternsArray;
