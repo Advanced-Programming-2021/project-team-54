@@ -1,0 +1,2 @@
+class Bitron extends Action{
+}

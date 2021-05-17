@@ -80,6 +80,18 @@ public class GameBoard {
         monsterField.remove(number);
 
     }
+    public void removeMonsterFromMonsterField(Card card){
+        for(int i = 1 ; i <= 5 ; i++){
+            if(monsterField.containsKey(i)){
+                if (monsterField.get(i)== card){
+                    monsterField.remove(i);
+                    return;
+                }
+
+            }
+        }
+
+    }
     public void removeCardFromHand(Card card){
         for(int i = 0 ; i < inHandCard.size() ; i++){
             if(card==inHandCard.get(i)){

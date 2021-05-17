@@ -1,0 +1,2 @@
+class Wattaildragon extends Action{
+}

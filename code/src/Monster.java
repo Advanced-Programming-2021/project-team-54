@@ -12,6 +12,14 @@ public class Monster extends Card {
     private int level;
 
 
+    public int getAttackPower() {
+        return attackPower;
+    }
+    public int getDefencePower(){
+        return  defencePower;
+    }
+
+
 
     Monster(String name, String description, int cardKind, int attackPower, int defencePower, int level) {
         super(name, description, cardKind);
