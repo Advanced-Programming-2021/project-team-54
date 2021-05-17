@@ -1,2 +1,0 @@
-class Haniwa extends Action{
-}

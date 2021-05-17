@@ -1,2 +1,0 @@
-class Fireyarou extends Action{
-}

@@ -1,4 +1,4 @@
-package Card;
+package Game;
 
 import java.io.File;
 import java.io.FileReader;
@@ -16,7 +16,7 @@ public class Card {
         this.cardDescription = cardDescription;
         this.cardKind = cardKind;
     }
-    enum State{
+    public enum State{
         OO,DO,DH,O,H;
     }
     private State state;
@@ -53,28 +53,6 @@ public class Card {
         return cardName;
     }
 
-<<<<<<< HEAD:code/src/Card.java
-=======
-//    public static Game.Card.Game.Card getCardByName(String name){
-//        String currentState = System.getProperty("user.dir");
-//        File usersFile = new File(currentState + "\\users\\" + name + ".json");
-//        JSONParser jsonParser = new JSONParser();
-//
-//        try (FileReader fileReader = new FileReader(usersFile)) {
-//
-//            JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
-//            String username = (String)jsonObject.get("name");
-//            String description = (String)jsonObject.get("description");
-//            return new Game.Card.Game.Card(username  , description);
-//
-//
-//
-//        } catch (Exception e) {
-//            return new Game.Card.Game.Card("null"  , "null");
-//        }
-//
-//    }
->>>>>>> f49eebfdb3fd139cb8ebf0bb2234ee4508bc7176:code/src/Card/Card.java
 
     public static Card getCardByName(String name){
         File file = new File(System.getProperty("user.dir")+"\\src\\cards\\"+name+".json");

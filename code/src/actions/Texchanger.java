@@ -1,2 +1,0 @@
-class Texchanger extends Action{
-}

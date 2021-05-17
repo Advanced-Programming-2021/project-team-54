@@ -1,5 +1,0 @@
-
-
-
-class Suijin extends Action{
-}
