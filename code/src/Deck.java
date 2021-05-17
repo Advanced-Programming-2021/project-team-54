@@ -2,7 +2,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,7 +17,7 @@ public class Deck {
     private HashMap<String, Integer> mainDeck;
     private HashMap<String, Integer> sideDeck;
 
-    public static void DeckControll(String input, Player player) {
+    public static void deckControl(String input, Player player) {
 
         Pattern createDeckRegex = Pattern.compile("deck create ([\\S]+)");
         Matcher matcher = createDeckRegex.matcher(input);
@@ -100,6 +99,10 @@ public class Deck {
         return counter;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
     public String[] convertCardListToArray(int mainOrside) {
         ArrayList<String> list = new ArrayList<>();
         if (mainOrside == 1) {
@@ -124,6 +127,10 @@ public class Deck {
         return counter;
     }
 
+    public  String getName(){
+        return this.name;
+    }
+
     public int numberOfThisCardInDeck(String name) {
         int counter = 0;
         if (mainDeck.containsKey(name))
@@ -133,7 +140,14 @@ public class Deck {
         return counter;
     }
 
-    public void removeCardFromMaindeck(String cardName) {
+    public HashMap<String , Integer> getMaindeck(){
+        return  mainDeck;
+    }
+    public HashMap<String , Integer> getSidedeck(){
+        return sideDeck;
+    }
+
+    public void removeCardFromMainDeck(String cardName) {
         if (mainDeck.get(cardName).intValue() == 1) {
             mainDeck.remove(cardName);
         } else {
@@ -219,10 +233,10 @@ public class Deck {
         JSONParser jsonParser = new JSONParser();
         HashMap<String, Integer> mainDeck = new HashMap<>();
         HashMap<String, Integer> sideDeck = new HashMap<>();
-        String name = "null";
+        String name =""+ deckName;
         try (FileReader fileReader = new FileReader(file);) {
             JSONObject mainObj = (JSONObject) jsonParser.parse(fileReader);
-            name = (String) mainObj.get("name");
+
             JSONArray mainlist = (JSONArray) mainObj.get("maindeck");
             JSONArray sidelist = (JSONArray) mainObj.get("sidedeck");
             for (Object obj : mainlist) {
@@ -263,7 +277,7 @@ public class Deck {
         Deck deck = new Deck(name, new HashMap<>(), new HashMap<>());
         deck.addDeckFile();
         player.addDeck(name);
-        player.updateInjsonFile();
+        player.updateInJsonFile();
         System.out.println("deck created successfully!");
     }
 
@@ -281,7 +295,7 @@ public class Deck {
             player.addCard(name, deck.sideDeck.get(name));
         }
         player.deleteDeck(deckName);
-        player.updateInjsonFile();
+        player.updateInJsonFile();
         File file = new File(System.getProperty("user.dir") + "\\src\\decks\\" + deckName + ".json");
         file.delete();
         System.out.println("deck deleted successfully");
@@ -313,7 +327,7 @@ public class Deck {
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
         String ststicstr = "^deck add-card";
         ArrayList<String> p = new ArrayList<>();
-        loginMenu.patternmaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, ststicstr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -322,7 +336,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        loginMenu.patternmaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, ststicstr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 
@@ -354,7 +368,7 @@ public class Deck {
         }
         String deckName = matcher.group("deckname");
         String cardName = matcher.group("cardname");
-        if (!player.doesHaveThiscard(cardName)) {
+        if (!player.doesHaveThisCard(cardName)) {
             System.out.println("card with name " + cardName + " does not exist");
             return;
         }
@@ -389,14 +403,13 @@ public class Deck {
 
         }
         deck.updateFile();
-        player.updateInjsonFile();
+        player.updateInJsonFile();
         System.out.println("card added to deck successfully");
 
 
     }
 
     public static void removeCardFromDeck(String input, Player player) {
-
         Matcher matcher = Pattern.compile("kmk").matcher("");
         String patterns[] = removeCardToDeckPatterns();
         for (String pattern : patterns) {
@@ -428,11 +441,11 @@ public class Deck {
                 System.out.println("card with name " + cardName + " does not exist in main deck");
                 return;
             }
-            deck.removeCardFromMaindeck(cardName);
+            deck.removeCardFromMainDeck(cardName);
             player.addCard(cardName,1);
         }
         deck.updateFile();
-        player.updateInjsonFile();
+        player.updateInJsonFile();
         System.out.println("card removed form deck successfully");
 
 
@@ -457,7 +470,7 @@ public class Deck {
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
         String ststicstr = "^deck rm-card";
         ArrayList<String> p = new ArrayList<>();
-        loginMenu.patternmaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, ststicstr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -466,7 +479,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        loginMenu.patternmaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, ststicstr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 
@@ -477,7 +490,6 @@ public class Deck {
     public boolean isDeckValid() {
         if (numberOfMainDeckCard() >= 40)
             return true;
-
         return false;
     }
 

@@ -1,7 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Mainmenu {
+public class MainMenu {
 public static Player player;
 public  static void mainMenuController(String input){
     Pattern enterMenuRegex = Pattern.compile("menu enter (Duel|Deck|Scoreboard|Profile|Shop)");
@@ -16,8 +16,8 @@ public  static void mainMenuController(String input){
         exitMenu();
         return;
     }
-    Pattern showCurentMenuRegex = Pattern.compile("menu show-current");
-    matcher = showCurentMenuRegex.matcher(input);
+    Pattern showCurrentMenuRegex = Pattern.compile("menu show-current");
+    matcher = showCurrentMenuRegex.matcher(input);
     if(matcher.find()){
         showCurrentMenu();
         return;
