@@ -11,16 +11,16 @@ public class BattleWave {
     private Player opponent;
     private ArrayList<Card> cardsThatSummonInThisPhases = new ArrayList<>();
     private ArrayList<Card> selectedCard = new ArrayList<>();
-    private boolean changedposition;
+    private boolean changedPosition;
 
     public void setChangedPosition(boolean changedPosition) {
-        if(this.changedposition)
+        if(this.changedPosition)
             return;
-        this.changedposition = changedPosition;
+        this.changedPosition = changedPosition;
     }
 
     public boolean getChangePosition(){
-        return changedposition;
+        return changedPosition;
     }
 
     public BattleWave(Player opponent, Player self) {
@@ -96,7 +96,7 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if (!isSelectedCardInhand()) {
+        if (!isSelectedCardInHand()) {
             System.out.println("you can’t summon this card");
             return;
         }
@@ -182,7 +182,7 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if(!isSelectedCardInhand()){
+        if(!isSelectedCardInHand()){
             System.out.println("you can’t set this card");
             return;
         }
@@ -212,7 +212,7 @@ public class BattleWave {
             System.out.println("this card is already in the wanted position");
             return;
         }
-        if(changedposition){
+        if(changedPosition){
             System.out.println("you already changed this card position in this turn");
             return;
         }
@@ -249,7 +249,7 @@ public class BattleWave {
 
     }
 
-    public boolean isSelectedCardInhand() {
+    public boolean isSelectedCardInHand() {
         Card card = selectedCard.get(0);
         ArrayList<Card> Cards = self.getGameBoard().getInHandCard();
         for (Card card1 : Cards) {
