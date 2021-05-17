@@ -1,9 +1,12 @@
+package Card;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class Mounster extends Card {
     private int attackPower;
@@ -22,11 +25,8 @@ public class Mounster extends Card {
         File file = new File(System.getProperty("user.dir") + "\\src\\cards\\" + super.getCardName() + ".json");
 
         try( FileWriter fileWriter = new FileWriter(file);) {
-
-
             JSONObject obj = new JSONObject();
             obj.put("name", super.getCardName());
-
             obj.put("description", super.getCardDescription());
             obj.put("attack", this.attackPower + "");
             obj.put("defence", this.defencePower + "");
@@ -54,9 +54,9 @@ public class Mounster extends Card {
         }
         return new Mounster("","",0,0,0,0);
     }
-
-    public static void main(String[] args) {
-        Mounster mounster = new Mounster("Teramp","pool",1,3000,600,7);
-        mounster.addThisCardFile();
-    }
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        Mounster mounster = new Mounster(scanner.nextLine(),)
+//    }
 }
