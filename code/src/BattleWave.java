@@ -12,16 +12,16 @@ public class BattleWave {
     private ArrayList<Card> cardsThatSummonInThisPhases = new ArrayList<>();
     private ArrayList<Card> selectedCard = new ArrayList<>();
     private ArrayList<Card> cardsThatAttacked = new ArrayList<>();
-    private boolean changedposition;
+    private boolean changedPosition;
 
-    public void setChangedposition(boolean changedposition) {
-        if(this.changedposition)
+    public void setChangedPosition(boolean changedPosition) {
+        if(this.changedPosition)
             return;
-        this.changedposition = changedposition;
+        this.changedPosition = changedPosition;
     }
 
-    public boolean getChangeposition(){
-        return changedposition;
+    public boolean getChangedPosition(){
+        return changedPosition;
     }
 
     public BattleWave(Player opponent, Player self) {
@@ -104,7 +104,7 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if (!isSelectedCardInhand()) {
+        if (!isSelectedCardInHand()) {
             System.out.println("you can’t summon this card");
             return;
         }
@@ -120,8 +120,8 @@ public class BattleWave {
             System.out.println("you already summoned/set on this turn");
             return;
         }
-        Monster mounster = (Monster) selectedCard.get(0);
-        if(mounster.getLevel()<=4){
+        Monster monster = (Monster) selectedCard.get(0);
+        if(monster.getLevel()<=4){
             self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
             self.getGameBoard().removeCardFromHand(selectedCard.get(0));
             setSetOrSummon(true);
@@ -131,7 +131,7 @@ public class BattleWave {
             return;
 
         }
-        if(mounster.getLevel()==5||mounster.getLevel()==6){
+        if(monster.getLevel()==5||monster.getLevel()==6){
             if(self.getGameBoard().getNumberOfMonsterField()<1){
                 System.out.println("there are not enough cards for tribute");
                 return;
@@ -154,7 +154,7 @@ public class BattleWave {
             }
 
         }
-        if(mounster.getLevel()>=7){
+        if(monster.getLevel()>=7){
             if(self.getGameBoard().getNumberOfMonsterField()<2){
                 System.out.println("there are not enough cards for tribute");
                 return;
@@ -190,7 +190,7 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if(!isSelectedCardInhand()){
+        if(!isSelectedCardInHand()){
             System.out.println("you can’t set this card");
             return;
         }
@@ -220,7 +220,7 @@ public class BattleWave {
             System.out.println("this card is already in the wanted position");
             return;
         }
-        if(changedposition){
+        if(changedPosition){
             System.out.println("you already changed this card position in this turn");
             return;
         }
@@ -228,7 +228,7 @@ public class BattleWave {
             selectedCard.get(0).setState(Card.State.OO);
         if(state.contentEquals("defense"))
             selectedCard.get(0).setState(Card.State.DO);
-        setChangedposition(true);
+        setChangedPosition(true);
         System.out.println("monster card position changed successfully");
 
     }
@@ -257,7 +257,7 @@ public class BattleWave {
 
     }
 
-    public boolean isSelectedCardInhand() {
+    public boolean isSelectedCardInHand() {
         Card card = selectedCard.get(0);
         ArrayList<Card> Cards = self.getGameBoard().getInHandCard();
         for (Card card1 : Cards) {
@@ -298,14 +298,14 @@ public class BattleWave {
             System.out.println("you can’t do this action in this phase");
             return;
         }
-        if(doesSelecedCardAlreadyAttacked()){
+        if(doesSelectedCardAlreadyAttacked()){
             System.out.println("this card already attacked");
             return;
         }
         int num = Integer.parseInt(matcher.group(1));
         if(opponent.getGameBoard().getMonsterField().containsKey(num)){}
     }
-    public boolean doesSelecedCardAlreadyAttacked(){
+    public boolean doesSelectedCardAlreadyAttacked(){
         for (Card card:
                 cardsThatAttacked) {
             if(card == selectedCard.get(0))

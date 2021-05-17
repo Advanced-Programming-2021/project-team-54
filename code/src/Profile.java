@@ -10,7 +10,7 @@ public class Profile {
             changeNickname(matcher,player);
             return;
         }
-        if(haveThisStrChangepassPattern(input)){
+        if(haveThisStrChangePassPattern(input)){
             changePass(input,player);
             return;
         }
@@ -68,7 +68,7 @@ public class Profile {
         profileControl(player,"profile change --password --current 1234 --new ss");
 
     }
-    public  static boolean haveThisStrChangepassPattern(String input){
+    public  static boolean haveThisStrChangePassPattern(String input){
         String[] patterns = changePasswordPatterns();
         for (String patter:
              patterns) {
@@ -89,13 +89,13 @@ public class Profile {
             if(matcher.find())
                 break;
         }
-        String currrentPass = matcher.group("currentpass");
+        String currentPass = matcher.group("currentpass");
         String newPass = matcher.group("newpass");
-        if(!currrentPass.contentEquals(player.getPassword())){
+        if(!currentPass.contentEquals(player.getPassword())){
             System.out.println("current password is invalid");
             return;
         }
-        if(currrentPass.contentEquals(newPass)){
+        if(currentPass.contentEquals(newPass)){
             System.out.println("please enter a new password");
             return;
         }

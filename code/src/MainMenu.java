@@ -41,6 +41,6 @@ public static void exitMenu(){
     Controller.menuNumber =1;
 }
 public static void showCurrentMenu(){
-    System.out.println("Mainmenu");
+    System.out.println("MainMenu");
 }
 }
