@@ -1,3 +1,5 @@
+
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -10,6 +12,14 @@ public class Monster extends Card {
     private int attackPower;
     private int defencePower;
     private int level;
+
+
+    public int getAttackPower() {
+        return attackPower;
+    }
+    public int getDefencePower(){
+        return  defencePower;
+    }
 
 
 
@@ -64,7 +74,7 @@ public class Monster extends Card {
     }
 
 //    public static void main(String[] args) {
-//        Card monster = new Monster("Tkakakak","pool",1,3000,600,7);
+//        Game.Card monster = new Game.Monster("Tkakakak","pool",1,3000,600,7);
 //        monster.addThisCardFile();
 //    }
 }

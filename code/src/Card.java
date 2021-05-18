@@ -1,3 +1,5 @@
+
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +16,7 @@ public class Card {
         this.cardDescription = cardDescription;
         this.cardKind = cardKind;
     }
-    enum State{
+    public enum State{
         OO,DO,DH,O,H;
     }
     private State state;

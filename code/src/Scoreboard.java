@@ -1,3 +1,5 @@
+
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +55,7 @@ public class Scoreboard {
     }
 
     public static void showCurrentMenu() {
-        System.out.println("Scoreboard");
+        System.out.println("Game.Scoreboard");
     }
 
     public static void sortListOfPlayers(Player[] players) {

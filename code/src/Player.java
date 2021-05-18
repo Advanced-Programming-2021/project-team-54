@@ -1,3 +1,5 @@
+
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -275,11 +277,17 @@ public class Player {
 
     }
 
+    public void setGameboard(int lp) {
+        this.gameboard = new GameBoard(this.getActiveDeck(),lp);
+    }
+
+
     public static void main(String[] args) {
         Player player = new Player("mobin", "12", 0, "mobin", 0);
+         player.addDeck("amir");
          createPlayerJsonFile(player);
-        //System.out.println(isThereThisNickname("jafar"));
-       // player = getPlayerByUsername("amir");
-        //System.out.println(player.listOfFreeCards.get("zzz"));
+
     }
+
+
 }

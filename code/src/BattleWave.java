@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -6,21 +8,25 @@ import java.util.regex.Pattern;
 public class BattleWave {
 
     private boolean setOrSummon;
-    private int battleWave = 0;
+    private int phase = 0;
     private Player self;
     private Player opponent;
     private ArrayList<Card> cardsThatSummonInThisPhases = new ArrayList<>();
     private ArrayList<Card> selectedCard = new ArrayList<>();
-    private boolean changedposition;
+    private ArrayList<Card> cardsThatAttacked = new ArrayList<>();
+    private boolean changedPosition;
+     public Card getSelectedCard(){
+         return selectedCard.get(0);
+     }
 
     public void setChangedPosition(boolean changedPosition) {
-        if(this.changedposition)
+        if(this.changedPosition)
             return;
-        this.changedposition = changedPosition;
+        this.changedPosition = changedPosition;
     }
 
-    public boolean getChangePosition(){
-        return changedposition;
+    public boolean getChangedPosition(){
+        return changedPosition;
     }
 
     public BattleWave(Player opponent, Player self) {
@@ -38,7 +44,7 @@ public class BattleWave {
         return setOrSummon;
     }
 
-    public void phaseController(String input) {
+    public void battleWaveController(String input) {
         Pattern summonRegex = Pattern.compile("^summon$");
         Matcher matcher = summonRegex.matcher(input);
         if (matcher.find()) {
@@ -57,10 +63,19 @@ public class BattleWave {
             flipSummon();
             return;
         }
+        matcher = Pattern.compile("attack ([\\d]+)").matcher(input);
+        if(matcher.find()){
+
+        }
+
     }
 
-    public int getBattleWave() {
-        return battleWave;
+    public void addCardToListThatSummonOrSetInThisBattleWave(Card card){
+         cardsThatSummonInThisPhases.add(card);
+    }
+
+    public int getPhase() {
+        return phase;
     }
 
     public Player getSelf() {
@@ -71,8 +86,8 @@ public class BattleWave {
         return opponent;
     }
 
-    public void setBattleWave(int battleWave) {
-        this.battleWave = battleWave;
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
     public void setSelf(Player self) {
@@ -96,11 +111,11 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if (!isSelectedCardInhand()) {
+        if (!isSelectedCardInHand()) {
             System.out.println("you can’t summon this card");
             return;
         }
-        if(battleWave !=2&& battleWave !=4){
+        if(phase!=2&&phase!=4){
             System.out.println("action not allowed in this phase");
             return;
         }
@@ -113,66 +128,7 @@ public class BattleWave {
             return;
         }
         Monster monster = (Monster) selectedCard.get(0);
-        if(monster.getLevel()<=4){
-            self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
-            self.getGameBoard().removeCardFromHand(selectedCard.get(0));
-            setSetOrSummon(true);
-            selectedCard.get(0).setState(Card.State.OO);
-            System.out.println("summoned successfully");
-            cardsThatSummonInThisPhases.add(selectedCard.get(0));
-            return;
-
-        }
-        if(monster.getLevel()==5|| monster.getLevel()==6){
-            if(self.getGameBoard().getNumberOfMonsterField()<1){
-                System.out.println("there are not enough cards for tribute");
-                return;
-            }
-            while (true){
-                System.out.println("please write the number of monster that you want to tribute");
-                int number = Integer.parseInt(Controller.scanner.nextLine());
-                if(!self.getGameBoard().getMonsterField().containsKey(number)){
-                    System.out.println("there no monsters one this address");
-                    continue;
-                }
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(number));
-                self.getGameBoard().removeMonsterFromMonsterField(number);
-                self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
-                System.out.println("summoned successfully");
-                setSetOrSummon(true);
-                selectedCard.get(0).setState(Card.State.OO);
-                cardsThatSummonInThisPhases.add(selectedCard.get(0));
-                return;
-            }
-
-        }
-        if(monster.getLevel()>=7){
-            if(self.getGameBoard().getNumberOfMonsterField()<2){
-                System.out.println("there are not enough cards for tribute");
-                return;
-            }
-            while(true){
-                System.out.println("please write the number of monsters that you want to tribute");
-                int num1 = Controller.scanner.nextInt();
-                int num2 = Controller.scanner.nextInt();
-                if(!self.getGameBoard().getMonsterField().containsKey(num1)||!self.getGameBoard().getMonsterField().containsKey(num2)){
-                    System.out.println("there no monsters one this address");
-                    continue;
-                }
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(num1));
-                self.getGameBoard().removeMonsterFromMonsterField(num1);
-                self.getGameBoard().sendCardToGrave(self.getGameBoard().getMonsterField().get(num2));
-                self.getGameBoard().removeMonsterFromMonsterField(num2);
-                self.getGameBoard().putMonsterInMonsterField(selectedCard.get(0));
-                setSetOrSummon(true);
-                System.out.println("summoned successfully");
-                cardsThatSummonInThisPhases.add(selectedCard.get(0));
-                selectedCard.get(0).setState(Card.State.OO);
-                return;
-            }
-
-        }
-
+        Action.summonAction(monster,self,this);
 
 
     }
@@ -182,7 +138,7 @@ public class BattleWave {
             System.out.println("no card is selected yet");
             return;
         }
-        if(!isSelectedCardInhand()){
+        if(!isSelectedCardInHand()){
             System.out.println("you can’t set this card");
             return;
         }
@@ -200,7 +156,7 @@ public class BattleWave {
             System.out.println("you can’t change this card position");
             return;
         }
-        if(battleWave !=2&& battleWave !=4){
+        if(phase!=2&&phase!=4){
             System.out.println("you can’t do this action in this phase");
             return;
         }
@@ -212,12 +168,12 @@ public class BattleWave {
             System.out.println("this card is already in the wanted position");
             return;
         }
-        if(changedposition){
+        if(changedPosition){
             System.out.println("you already changed this card position in this turn");
             return;
         }
         if(state.contentEquals("attack"))
-        selectedCard.get(0).setState(Card.State.OO);
+            selectedCard.get(0).setState(Card.State.OO);
         if(state.contentEquals("defense"))
             selectedCard.get(0).setState(Card.State.DO);
         setChangedPosition(true);
@@ -234,7 +190,7 @@ public class BattleWave {
             System.out.println("you can’t change this card position");
             return;
         }
-        if(battleWave !=2&& battleWave !=4){
+        if(phase!=2&&phase!=4){
             System.out.println("you can’t do this action in this phase");
             return;
         }
@@ -249,7 +205,7 @@ public class BattleWave {
 
     }
 
-    public boolean isSelectedCardInhand() {
+    public boolean isSelectedCardInHand() {
         Card card = selectedCard.get(0);
         ArrayList<Card> Cards = self.getGameBoard().getInHandCard();
         for (Card card1 : Cards) {
@@ -275,6 +231,50 @@ public class BattleWave {
                 return true;
         }
         return false;
+    }
+
+    public void attack(Matcher matcher){
+        if(selectedCard.size() == 0 ){
+            System.out.println("no card is selected yet");
+            return;
+        }
+        if(!isSelectedCardInMonsterField()){
+            System.out.println("you can’t attack with this card");
+            return;
+        }
+        if(phase!=3){
+            System.out.println("you can’t do this action in this phase");
+            return;
+        }
+        if(doesSelectedCardAlreadyAttacked()){
+            System.out.println("this card already attacked");
+            return;
+        }
+        int num = Integer.parseInt(matcher.group(1));
+        if(opponent.getGameBoard().getMonsterField().containsKey(num)){}
+    }
+    public boolean doesSelectedCardAlreadyAttacked(){
+        for (Card card:
+                cardsThatAttacked) {
+            if(card == selectedCard.get(0))
+                return true;
+        }
+        return false;
+    }
+
+    public void drawphase(){
+        if(self.getGameBoard().getInHandCard().size()>=5)
+            return;
+        Card card = self.getGameBoard().takeCardFromShuffleAndRemove();
+        self.getGameBoard().putCardInHand(card);
+
+    }
+
+
+    public void goToNextPhase(){
+         if(phase<5)
+             phase++;
+         System.out.println(phase);
     }
 
 }

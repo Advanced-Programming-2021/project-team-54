@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -267,7 +269,7 @@ public class PlayGame {
 
     }
 
-//    public static Card cardSelection(Player self, Player opponent, String input) {
+//    public static Game.Card cardSelection(Game.Player self, Game.Player opponent, String input) {
 //        re
 //    }
 
@@ -397,8 +399,11 @@ public class PlayGame {
         deck.addCardToMainDeck("div");
         deck.addCardToMainDeck("sam");
         deck.updateFile();
-        // Gameboard gameboard = new Gameboard("amir",100);
-        // player.setGameboard(gameboard);
+         GameBoard gameboard = new GameBoard(deck,100);
+         player.setGameBoard(gameboard);
+         gameboard.makeGameBoardReady();
+         BattleWave battleWave = new BattleWave(player,player);
+         battleWave.drawphase();
         showGameBoard(player, player);
     }
 }

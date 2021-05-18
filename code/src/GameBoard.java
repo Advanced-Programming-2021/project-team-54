@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+
+
+import java.util.*;
 
 public class GameBoard {
 
@@ -11,6 +12,7 @@ public class GameBoard {
     private HashMap<Integer, Card> spellTrapField = new HashMap<>();
     private ArrayList<Card> inHandCard = new ArrayList<>();
     private ArrayList<Card> fieldZoneCard = new ArrayList<>();
+    private ArrayList<String> shuffledDeck = new ArrayList<>();
 
     public GameBoard(Deck deck, int lp) {
         this.lp = lp;
@@ -80,6 +82,18 @@ public class GameBoard {
         monsterField.remove(number);
 
     }
+    public void removeMonsterFromMonsterField(Card card){
+        for(int i = 1 ; i <= 5 ; i++){
+            if(monsterField.containsKey(i)){
+                if (monsterField.get(i)== card){
+                    monsterField.remove(i);
+                    return;
+                }
+
+            }
+        }
+
+    }
     public void removeCardFromHand(Card card){
         for(int i = 0 ; i < inHandCard.size() ; i++){
             if(card==inHandCard.get(i)){
@@ -92,5 +106,51 @@ public class GameBoard {
     public void sendCardToGrave(Card card){
         grave.add(card.getCardName());
     }
+
+    public void removeCardFromDeck(String name ){
+        int number = mainDeck.get(name);
+        if(number==1){
+            mainDeck.remove(name);
+        }
+        else{
+            mainDeck.replace(name,mainDeck.get(name)-1);
+        }
+    }
+
+    public void shuffleDeck(){
+
+            for(String name : mainDeck.keySet()){
+                int num = mainDeck.get(name);
+                for(int i = 1 ; i <= num ;i++){
+                    shuffledDeck.add(name);
+                }
+            }
+            Collections.shuffle(shuffledDeck);
+
+    }
+
+    public void putCardInHand(Card card){
+
+        inHandCard.add(card);
+
+    }
+
+    public Card takeCardFromShuffleAndRemove(){
+        String name = shuffledDeck.get(0);
+        shuffledDeck.remove(0);
+        Card card = Card.getCardByName(name);
+        return card;
+    }
+
+
+
+    public void makeGameBoardReady(){
+        shuffleDeck();
+        for(int i = 0 ; i  <= 5 ;i++){
+            Card card = takeCardFromShuffleAndRemove();
+            inHandCard.add(card);
+        }
+    }
+
 
 }

@@ -1,3 +1,5 @@
+
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,13 +28,13 @@ public  static void mainMenuController(String input){
 }
 public static void enterMenu(Matcher matcher){
     String menu = matcher.group(1);
-    if(menu.contentEquals("Duel"))
+    if(menu.contentEquals("Game.Duel"))
         Controller.menuNumber = 3 ;
-    else if(menu.contentEquals("Deck"))
+    else if(menu.contentEquals("Game.Deck"))
         Controller.menuNumber = 4;
-    else  if(menu.contentEquals("Scoreboard"))
+    else  if(menu.contentEquals("Game.Scoreboard"))
         Controller.menuNumber = 5;
-    else if (menu.contentEquals("Profile"))
+    else if (menu.contentEquals("Game.Profile"))
         Controller.menuNumber = 6;
     else if (menu.contentEquals("Shop"))
         Controller.menuNumber=7;
@@ -41,6 +43,6 @@ public static void exitMenu(){
     Controller.menuNumber =1;
 }
 public static void showCurrentMenu(){
-    System.out.println("Mainmenu");
+    System.out.println("Game.MainMenu");
 }
 }

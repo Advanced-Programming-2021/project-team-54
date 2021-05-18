@@ -1,3 +1,5 @@
+
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,10 +37,7 @@ public class LoginMenu {
         System.out.println("invalid command");
     }
     public static void main(String[] args) {
-        InputStream src;
-        Scanner scanner = new Scanner(System.in);
-        String u = scanner.nextLine();
-        loginMenuRun(u);
+
     }
 
     public static void signingUp(String input) {
@@ -48,7 +47,7 @@ public class LoginMenu {
             Pattern pattern  = Pattern.compile(string);
             matcher = pattern.matcher(input);
             if(matcher.find())
-             break;
+                break;
         }
         String username = matcher.group("name");
         String nickname = matcher.group("nick");
@@ -141,10 +140,10 @@ public class LoginMenu {
             Pattern pattern = Pattern.compile(string);
             Matcher matcher  = pattern.matcher(input);
             if(matcher.find())
-             return true;
+                return true;
         }
         return false;
-        
+
     }
 
     public static void loggingIn(String input) {
@@ -155,7 +154,7 @@ public class LoginMenu {
             Pattern pattern  = Pattern.compile(string);
             matcher = pattern.matcher(input);
             if(matcher.find())
-             break;
+                break;
         }
         String username = matcher.group("name");
         String password = matcher.group("pass");

@@ -1,3 +1,5 @@
+
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -61,7 +63,7 @@ public class Deck {
         Pattern showAllCardsRegex = Pattern.compile("deck show --cards");
         matcher = showAllCardsRegex.matcher(input);
         if(matcher.find()){
-            showAllCardofPlayer(player);
+            showAllCardOfPlayer(player);
             return;
         }
         Pattern enterMenuRegex = Pattern.compile("menu enter (Login|Main|Duel|Profile|Scoreboard|Shop)");
@@ -103,9 +105,9 @@ public class Deck {
         return isActive;
     }
 
-    public String[] convertCardListToArray(int mainOrside) {
+    public String[] convertCardListToArray(int mainOrSide) {
         ArrayList<String> list = new ArrayList<>();
-        if (mainOrside == 1) {
+        if (mainOrSide == 1) {
             for (String name : mainDeck.keySet())
                 list.add(name);
         } else {
@@ -140,13 +142,6 @@ public class Deck {
         return counter;
     }
 
-    public HashMap<String , Integer> getMaindeck(){
-        return  mainDeck;
-    }
-    public HashMap<String , Integer> getSidedeck(){
-        return sideDeck;
-    }
-
     public void removeCardFromMainDeck(String cardName) {
         if (mainDeck.get(cardName).intValue() == 1) {
             mainDeck.remove(cardName);
@@ -155,7 +150,7 @@ public class Deck {
         }
     }
 
-    public void removeCardFromSidedeck(String cardName) {
+    public void removeCardFromSideDeck(String cardName) {
         if (sideDeck.get(cardName).intValue() == 1) {
             sideDeck.remove(cardName);
         } else {
@@ -237,13 +232,13 @@ public class Deck {
         try (FileReader fileReader = new FileReader(file);) {
             JSONObject mainObj = (JSONObject) jsonParser.parse(fileReader);
 
-            JSONArray mainlist = (JSONArray) mainObj.get("maindeck");
-            JSONArray sidelist = (JSONArray) mainObj.get("sidedeck");
-            for (Object obj : mainlist) {
+            JSONArray mainList = (JSONArray) mainObj.get("maindeck");
+            JSONArray sideList = (JSONArray) mainObj.get("sidedeck");
+            for (Object obj : mainList) {
                 JSONObject card = (JSONObject) obj;
                 mainDeck.put((String) card.get("name"), Integer.parseInt((String) card.get("number")));
             }
-            for (Object obj : sidelist) {
+            for (Object obj : sideList) {
                 JSONObject card = (JSONObject) obj;
                 sideDeck.put((String) card.get("name"), Integer.parseInt((String) card.get("number")));
             }
@@ -325,9 +320,9 @@ public class Deck {
 
         boolean b[] = new boolean[2];
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
-        String ststicstr = "^deck add-card";
+        String staticStr = "^deck add-card";
         ArrayList<String> p = new ArrayList<>();
-        LoginMenu.patternMaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, staticStr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -336,7 +331,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        LoginMenu.patternMaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, staticStr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 
@@ -434,7 +429,7 @@ public class Deck {
                 System.out.println("card with name " + cardName + " does not exist in side deck");
                 return;
             }
-            deck.removeCardFromSidedeck(cardName);
+            deck.removeCardFromSideDeck(cardName);
             player.addCard(cardName,1);
         } else {
             if (!deck.mainDeck.containsKey(cardName)) {
@@ -468,9 +463,9 @@ public class Deck {
 
         boolean b[] = new boolean[2];
         String component[] = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)"};
-        String ststicstr = "^deck rm-card";
+        String staticStr = "^deck rm-card";
         ArrayList<String> p = new ArrayList<>();
-        LoginMenu.patternMaker(component, ststicstr, b, p);
+        LoginMenu.patternMaker(component, staticStr, b, p);
         String[] patterns = new String[8];
         for (int i = 0; i < 2; i++) {
             patterns[i] = p.get(i) + "$";
@@ -479,7 +474,7 @@ public class Deck {
         b = new boolean[3];
         p = new ArrayList<>();
         String[] component2 = {" --card (?<cardname>[\\S]+)", " --deck (?<deckname>[\\S]+)", " --side"};
-        LoginMenu.patternMaker(component2, ststicstr, b, p);
+        LoginMenu.patternMaker(component2, staticStr, b, p);
         for (int i = 0; i < 6; i++) {
             patterns[i + 2] = p.get(i) + "$";
 
@@ -518,9 +513,9 @@ public class Deck {
     }
 
     public static int getActiveDeckNumberInArray(Player player) {
-        String decksNemas[] = player.getDecksOfThisPlayer();
-        for (int i = 0; i < decksNemas.length; i++) {
-            Deck deck = getDeckByName(decksNemas[i]);
+        String decksNames[] = player.getDecksOfThisPlayer();
+        for (int i = 0; i < decksNames.length; i++) {
+            Deck deck = getDeckByName(decksNames[i]);
             if (deck.isActive)
                 return i;
         }
@@ -560,7 +555,7 @@ public class Deck {
         }
         String deckName = matcher.group(1);
         Deck deck = getDeckByName(deckName);
-        System.out.println("Deck: " + deckName);
+        System.out.println("Game.Deck: " + deckName);
         String[] cardNames;
         if (input.contains(" --side")) {
             System.out.println("Side deck:");
@@ -577,7 +572,7 @@ public class Deck {
             }
 
         }
-        System.out.println("Spell and Traps:");
+        System.out.println("Game.Spell and Traps:");
         for (int i = 0; i < cardNames.length; i++) {
             Card card = Card.getCardByName(cardNames[i]);
             if (card.getCardKind() > 1) {
@@ -588,7 +583,7 @@ public class Deck {
         }
     }
 
-    public static void showAllCardofPlayer(Player player){
+    public static void showAllCardOfPlayer(Player player){
         String[] list = player.AllCardList();
         for (int i = 0 ; i < list.length ; i++) {
             Card card = Card.getCardByName(list[i]);
@@ -603,7 +598,7 @@ public class Deck {
         Controller.menuNumber = 2;
     }
     public static void showCurrentMenu(){
-        System.out.println("Deck");
+        System.out.println("Game.Deck");
     }
 
     public static void main(String[] args) {
