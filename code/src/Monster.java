@@ -23,8 +23,8 @@ public class Monster extends Card {
 
 
 
-    Monster(String name, String description, int cardKind, int attackPower, int defencePower, int level) {
-        super(name, description, cardKind);
+    Monster(String name, String description, int cardKind, int attackPower, int defencePower, int level , int price , String type) {
+        super(name, description, cardKind,price,type);
         this.attackPower = attackPower;
         this.defencePower = defencePower;
         this.level = level;
@@ -63,10 +63,12 @@ public class Monster extends Card {
             int attack = Integer.parseInt((String) obj.get("attack"));
             int defence = Integer.parseInt((String) obj.get("defence"));
             int level = Integer.parseInt((String) obj.get("level"));
-            return  new Monster(name,description,kind,attack,defence,level);
+            int price = Integer.parseInt((String) obj.get("price"));
+            String type = (String) obj.get("type");
+            return  new Monster(name,description,kind,attack,defence,level,price,type);
         } catch (Exception e) {
         }
-        return new Monster("","",0,0,0,0);
+        return new Monster("","",0,0,0,0,0,"");
     }
 
     public int getLevel(){

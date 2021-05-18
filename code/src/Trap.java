@@ -10,8 +10,8 @@ import java.io.FileWriter;
 public class Trap extends Card {
 
 
-    Trap(String name, String description, int kind) {
-        super(name, description, kind);
+    Trap(String name, String description, int kind,int price,String type) {
+        super(name, description, kind,price,type);
     }
 
     @Override
@@ -34,9 +34,11 @@ public class Trap extends Card {
         try(FileReader fileReader = new FileReader(file);){
             JSONObject obj = (JSONObject) jsonParser.parse(fileReader);
             String description = (String) obj.get("description");
+            int price = Integer.parseInt((String) obj.get("price"));
+            String type = (String) obj.get("type");
             int kind = 3;
-            return new Trap(name,description,kind);
+            return new Trap(name,description,kind,price,type);
         }catch (Exception e){}
-        return new Trap("","",0);
+        return new Trap("","",0,0,"");
     }
 }

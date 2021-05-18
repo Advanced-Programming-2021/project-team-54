@@ -8,8 +8,8 @@ import java.io.FileWriter;
 
 
 public class Spell extends Card{
-    Spell(String name , String description , int kind ){
-        super(name , description , kind);
+    Spell(String name , String description , int kind ,int price , String type){
+        super(name , description , kind,price,type);
     }
 
     @Override
@@ -32,18 +32,20 @@ public class Spell extends Card{
         try(FileReader fileReader = new FileReader(file);){
             JSONObject obj = (JSONObject) jsonParser.parse(fileReader);
             String description  = (String) obj.get("description");
+            int price = Integer.parseInt((String) obj.get("price"));
+            String type = (String) obj.get("type");
+
             int kind = 2 ;
-            return new Spell(name,description,2);
+            return new Spell(name,description,2,price,type);
 
         }catch (Exception e){
 
         }
-        return new Spell("","",0);
+        return new Spell("","",0,0,"");
     }
 
     public static void main(String[] args) {
-        Spell spell = new Spell("sam" , "koshande" , 1);
-        spell.addThisCardFile();
+
 
         //System.out.println(card.getCardDescription());
     }

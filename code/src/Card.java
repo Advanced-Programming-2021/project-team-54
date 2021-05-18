@@ -8,10 +8,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 public class Card {
 
+
+    private int cardPrice;
+    private String cardType;
     private String cardName;
     private String cardDescription;
     private int cardKind;
-    public Card(String name,String cardDescription,int cardKind){
+    public Card(String name,String cardDescription,int cardKind,int price , String type){
+        this.cardPrice = price;
+        this.cardType = type;
         this.cardName = name;
         this.cardDescription = cardDescription;
         this.cardKind = cardKind;
@@ -53,6 +58,12 @@ public class Card {
         return cardName;
     }
 
+    public int getCardPrice(){
+        return cardPrice;
+    }
+    public String getCardType(){
+        return cardType;
+    }
 
     public static Card getCardByName(String name){
         File file = new File(System.getProperty("user.dir")+"\\src\\cards\\"+name+".json");
@@ -71,7 +82,7 @@ public class Card {
 
         }
         catch (Exception e){}
-        return new Card("","",0);
+        return new Card("","",0,0,"");
     }
 
     public static void exportCard(String name,String cardDescription) {
