@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefWidth="900.0" prefHeight="600.0" style="-fx-background-color: black"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.view.PreGameSettings">
+    <top>
+        <HBox alignment="TOP_LEFT">
+            <Label fx:id="backText" layoutX="11.0" onMouseClicked="#back" prefHeight="40.0" prefWidth="40.0" text="←" textFill="yellow">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER">
+            <Label text="Game Settings" textFill="yellow" alignment="TOP_CENTER">
+                <font>
+                    <Font name="System Bold" size="34"/>
+                </font>
+                <VBox.margin>
+                    <Insets bottom="200"/>
+                </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER">
+                <Text fx:id="pacmanLives" fill="cyan">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </Text>
+                <Button onMouseClicked="#increasePacmanLives" text="+">
+                    <HBox.margin>
+                        <Insets right="5.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button onMouseClicked="#reducePacmanLives" text="-"/>
+                <VBox.margin>
+                    <Insets bottom="10.0"/>
+                </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+                <fx:define>
+                    <ToggleGroup fx:id="difficulty"/>
+                </fx:define>
+                <Text text="Difficulty:" fill="cyan"/>
+                <RadioButton fx:id="difficultyEasy" selected="true" text="Easy" toggleGroup="$difficulty" textFill="green">
+                    <HBox.margin>
+                        <Insets left="5" right="3.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <RadioButton text="Hard" toggleGroup="$difficulty" textFill="red">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <VBox.margin>
+                    <Insets bottom="100.0"/>
+                </VBox.margin>
+            </HBox>
+
+            <Button text="Start the Game" onMouseClicked="#startGameClicked" prefWidth="100.0" style="-fx-background-color: cyan">
+                <VBox.margin>
+                    <Insets bottom="10.0"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </center>
+
+</BorderPane>

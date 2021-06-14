@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            style="-fx-background-color: black"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.view.ChangeNickname"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <top>
+        <HBox alignment="TOP_LEFT">
+            <Label fx:id="backText" layoutX="11.0" onMouseClicked="#back" prefHeight="40.0" prefWidth="40.0" text="←" textFill="yellow">
+                <font>
+                    <Font size="24"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" >
+            <Label fx:id="messageBox" alignment="CENTER" prefHeight="200.0" prefWidth="2000.0" textFill="RED">
+                <VBox.margin>
+                    <Insets bottom="10"/>
+                </VBox.margin>
+            </Label>
+            <Label text="Nickname :" textFill="ORANGE">
+                <VBox.margin>
+                    <Insets bottom="10"/>
+                </VBox.margin>
+            </Label>
+            <TextField fx:id="nicknameTextField" maxWidth="200.0" promptText="Enter your New Nickname">
+                <VBox.margin>
+                    <Insets bottom="20"/>
+                </VBox.margin>
+            </TextField>
+            <Button fx:id="nextButton" mnemonicParsing="false" onMouseClicked="#changeNickname" prefHeight="26.0" prefWidth="193.0" text="Change Nickname" />
+        </VBox>
+    </center>
+</BorderPane>
