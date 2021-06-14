@@ -62,34 +62,36 @@ public class Deck {
         }
         Pattern showAllCardsRegex = Pattern.compile("deck show --cards");
         matcher = showAllCardsRegex.matcher(input);
-        if(matcher.find()){
+        if (matcher.find()) {
             showAllCardOfPlayer(player);
             return;
         }
         Pattern enterMenuRegex = Pattern.compile("menu enter (Login|Main|Duel|Profile|Scoreboard|Shop)");
         matcher = enterMenuRegex.matcher(input);
-        if(matcher.find()){
+        if (matcher.find()) {
             enterMenu();
             return;
         }
         Pattern exitRegex = Pattern.compile("menu exit");
         matcher = exitRegex.matcher(input);
-        if(matcher.find()){
+        if (matcher.find()) {
             exit();
             return;
         }
         Pattern showCurrentMenuRegex = Pattern.compile("menu show-current");
         matcher = showCurrentMenuRegex.matcher(input);
-        if (matcher.find()){
+        if (matcher.find()) {
             showCurrentMenu();
             return;
         }
         System.out.println("invalid command");
     }
-    public HashMap<String, Integer> getMainDeck(){
+
+    public HashMap<String, Integer> getMainDeck() {
         return mainDeck;
     }
-    public HashMap<String, Integer> getSideDeck(){
+
+    public HashMap<String, Integer> getSideDeck() {
         return sideDeck;
     }
 
@@ -129,7 +131,7 @@ public class Deck {
         return counter;
     }
 
-    public  String getName(){
+    public String getName() {
         return this.name;
     }
 
@@ -158,10 +160,11 @@ public class Deck {
         }
     }
 
-    public Deck(String name, HashMap<String, Integer> mainDeck, HashMap<String, Integer> sideDeck) {
+    public Deck(String name, HashMap<String, Integer> mainDeck, HashMap<String, Integer> sideDeck,boolean isActive) {
         this.name = name;
         this.mainDeck = new HashMap<>(mainDeck);
         this.sideDeck = new HashMap<>(sideDeck);
+        this.isActive = isActive;
     }
 
     public void addCardToMainDeck(String cardName) {
@@ -228,7 +231,7 @@ public class Deck {
         JSONParser jsonParser = new JSONParser();
         HashMap<String, Integer> mainDeck = new HashMap<>();
         HashMap<String, Integer> sideDeck = new HashMap<>();
-        String name =""+ deckName;
+        String name = "" + deckName;
         try (FileReader fileReader = new FileReader(file);) {
             JSONObject mainObj = (JSONObject) jsonParser.parse(fileReader);
 
@@ -242,12 +245,13 @@ public class Deck {
                 JSONObject card = (JSONObject) obj;
                 sideDeck.put((String) card.get("name"), Integer.parseInt((String) card.get("number")));
             }
-            return new Deck(name, mainDeck, sideDeck);
+            boolean state = Boolean.parseBoolean((String) mainObj.get("active"));
+            return new Deck(name, mainDeck, sideDeck,state);
 
 
         } catch (Exception e) {
         }
-        return new Deck(name, mainDeck, sideDeck);
+        return new Deck(name, mainDeck, sideDeck,false);
     }
 
     public static boolean isThereThisDeck(String deckName) {
@@ -269,7 +273,7 @@ public class Deck {
             return;
 
         }
-        Deck deck = new Deck(name, new HashMap<>(), new HashMap<>());
+        Deck deck = new Deck(name, new HashMap<>(), new HashMap<>(),false);
         deck.addDeckFile();
         player.addDeck(name);
         player.updateInJsonFile();
@@ -430,14 +434,14 @@ public class Deck {
                 return;
             }
             deck.removeCardFromSideDeck(cardName);
-            player.addCard(cardName,1);
+            player.addCard(cardName, 1);
         } else {
             if (!deck.mainDeck.containsKey(cardName)) {
                 System.out.println("card with name " + cardName + " does not exist in main deck");
                 return;
             }
             deck.removeCardFromMainDeck(cardName);
-            player.addCard(cardName,1);
+            player.addCard(cardName, 1);
         }
         deck.updateFile();
         player.updateInJsonFile();
@@ -583,31 +587,30 @@ public class Deck {
         }
     }
 
-    public static void showAllCardOfPlayer(Player player){
+    public static void showAllCardOfPlayer(Player player) {
         String[] list = player.AllCardList();
-        for (int i = 0 ; i < list.length ; i++) {
+        for (int i = 0; i < list.length; i++) {
             Card card = Card.getCardByName(list[i]);
-            System.out.println(card.getCardName()+": "+card.getCardDescription());
+            System.out.println(card.getCardName() + ": " + card.getCardDescription());
         }
 
     }
-    public static void enterMenu(){
+
+    public static void enterMenu() {
         System.out.println("menu navigation is not possible");
     }
-    public static void exit(){
+
+    public static void exit() {
         Controller.menuNumber = 2;
     }
-    public static void showCurrentMenu(){
+
+    public static void showCurrentMenu() {
         System.out.println("Game.Deck");
     }
 
     public static void main(String[] args) {
+        Deck deck = getDeckByName("a");
 
-        //System.out.println(addCardToDeckPatterns()[7]);
-        ArrayList<String> list = new ArrayList<>();
-        list.add("amir");
-        list.add("mobin");
-        list.add("arad");
-        System.out.println(list.contains(""));
+        System.out.println(deck.isActive);
     }
 }

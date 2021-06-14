@@ -53,8 +53,8 @@ public class Monster extends Card {
     }
 
 
-    public static Monster getMonsterByName(String name) {
-        File file = new File(System.getProperty("user.dir") + "\\src\\cards\\" + name + ".json");
+    public static Monster getCardByName(String name) {
+        File file = new File(System.getProperty("user.dir")+"\\src\\cards\\"+name+".json");
         JSONParser jsonParser = new JSONParser();
         try (FileReader fileReader = new FileReader(file);) {
             JSONObject obj = (JSONObject) jsonParser.parse(fileReader);
@@ -79,4 +79,8 @@ public class Monster extends Card {
 //        Game.Card monster = new Game.Monster("Tkakakak","pool",1,3000,600,7);
 //        monster.addThisCardFile();
 //    }
+public static void main(String[] args) {
+    Card card = Monster.getCardByName("Axe_Raider");
+    System.out.println(card.getCardName());
+}
 }

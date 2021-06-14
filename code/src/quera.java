@@ -12,5 +12,6 @@ public class quera {
             default:
                 System.out.println("no");
         }
+        System.out.println(1/0);
     }
 }

@@ -20,6 +20,10 @@ public class GameBoard {
         this.sideDeck = new HashMap<>(deck.getSideDeck());
     }
 
+    public ArrayList<String> getGrave() {
+        return this.grave;
+    }
+
     public int getLp() {
         return this.lp;
     }
@@ -60,32 +64,36 @@ public class GameBoard {
         return fieldZoneCard.size();
     }
 
-    public  ArrayList<Card> getFieldZoneCard(){
+    public ArrayList<Card> getFieldZoneCard() {
         return fieldZoneCard;
     }
-    public ArrayList<Card> getInHandCard(){
+
+    public ArrayList<Card> getInHandCard() {
         return inHandCard;
     }
 
-    public int getNumberOfMonsterField(){
+    public int getNumberOfMonsterField() {
         return monsterField.size();
     }
-    public void putMonsterInMonsterField(Card card){
-        for(int i = 1 ; i < 6 ; i++){
-            if(!monsterField.containsKey(i)){
-                monsterField.put(i,card);
+
+    public void putMonsterInMonsterField(Card card) {
+        for (int i = 1; i < 6; i++) {
+            if (!monsterField.containsKey(i)) {
+                monsterField.put(i, card);
                 return;
             }
         }
     }
-    public void removeMonsterFromMonsterField(int number){
+
+    public void removeMonsterFromMonsterField(int number) {
         monsterField.remove(number);
 
     }
-    public void removeMonsterFromMonsterField(Card card){
-        for(int i = 1 ; i <= 5 ; i++){
-            if(monsterField.containsKey(i)){
-                if (monsterField.get(i)== card){
+
+    public void removeMonsterFromMonsterField(Card card) {
+        for (int i = 1; i <= 5; i++) {
+            if (monsterField.containsKey(i)) {
+                if (monsterField.get(i) == card) {
                     monsterField.remove(i);
                     return;
                 }
@@ -94,48 +102,51 @@ public class GameBoard {
         }
 
     }
-    public void removeCardFromHand(Card card){
-        for(int i = 0 ; i < inHandCard.size() ; i++){
-            if(card==inHandCard.get(i)){
+
+    public void removeCardFromHand(Card card) {
+        for (int i = 0; i < inHandCard.size(); i++) {
+            if (card == inHandCard.get(i)) {
                 inHandCard.remove(i);
                 return;
             }
 
         }
     }
-    public void sendCardToGrave(Card card){
+
+    public void sendCardToGrave(Card card) {
         grave.add(card.getCardName());
+
     }
 
-    public void removeCardFromDeck(String name ){
+    public void removeCardFromDeck(String name) {
         int number = mainDeck.get(name);
-        if(number==1){
+        if (number == 1) {
             mainDeck.remove(name);
-        }
-        else{
-            mainDeck.replace(name,mainDeck.get(name)-1);
+        } else {
+            mainDeck.replace(name, mainDeck.get(name) - 1);
         }
     }
 
-    public void shuffleDeck(){
+    public void shuffleDeck() {
 
-            for(String name : mainDeck.keySet()){
-                int num = mainDeck.get(name);
-                for(int i = 1 ; i <= num ;i++){
-                    shuffledDeck.add(name);
-                }
+        for (String name : mainDeck.keySet()) {
+            int num = mainDeck.get(name);
+
+            for (int i = 1; i <= num; i++) {
+                shuffledDeck.add(name);
             }
-            Collections.shuffle(shuffledDeck);
+        }
+        Collections.shuffle(shuffledDeck);
 
     }
 
-    public void putCardInHand(Card card){
+    public void putCardInHand(Card card) {
 
         inHandCard.add(card);
 
     }
 
-    public Card takeCardFromShuffleAndRemove(){
+    public Card takeCardFromShuffleAndRemove() {
         String name = shuffledDeck.get(0);
         shuffledDeck.remove(0);
         Card card = Card.getCardByName(name);
@@ -143,14 +154,41 @@ public class GameBoard {
     }
 
 
-
-    public void makeGameBoardReady(){
+    public void makeGameBoardReady() {
         shuffleDeck();
-        for(int i = 0 ; i  <= 5 ;i++){
+        for (int i = 0; i <= 5; i++) {
             Card card = takeCardFromShuffleAndRemove();
             inHandCard.add(card);
         }
     }
 
 
+    public void setMonsterField(HashMap<Integer, Card> field) {
+        this.monsterField = field;
+    }
+
+    public void setSpellTrapField(HashMap<Integer, Card> field) {
+
+        this.spellTrapField = field;
+    }
+
+
+    public void putCardSpellOrTrapInSpellTrapField(Card card) {
+        for (int i = 1; i < 6; i++) {
+            if (!spellTrapField.containsKey(i)) {
+                spellTrapField.put(i, card);
+                return;
+            }
+        }
+    }
+
+    public void removeCardFromSpellTrap(Card card){
+        for (int i:
+             spellTrapField.keySet()) {
+            if(spellTrapField.get(i)==card){
+                spellTrapField.remove(i);
+                return;
+            }
+        }
+    }
 }

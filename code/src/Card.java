@@ -72,6 +72,7 @@ public class Card {
             JSONObject obj = (JSONObject) jsonParser.parse(fileReader);
             String description = (String) obj.get("description");
             int kind = Integer.parseInt((String) obj.get("kind"));
+            fileReader.close();
             if (kind == 1)
                 return Monster.getCardByName(name);
             if(kind == 2)
@@ -100,4 +101,9 @@ public class Card {
     }
 
     public  void addThisCardFile(){};
+
+    public static void main(String[] args) {
+        Card card = Monster.getCardByName("Axe_Raider");
+        System.out.println(card.getCardName());
+    }
 }

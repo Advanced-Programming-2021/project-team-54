@@ -81,10 +81,11 @@ public class Player {
         for (String name:
              listOfDeck) {
             Deck deck = Deck.getDeckByName(name);
+            System.out.println(deck.getName());
             if(deck.getIsActive())
                 return deck;
         }
-        return new Deck("null",new HashMap<String, Integer>(),new HashMap<String, Integer>());
+        return new Deck("null",new HashMap<String, Integer>(),new HashMap<String, Integer>(),false);
     }
 
     public boolean checkActivationOfDeck(){
@@ -282,10 +283,14 @@ public class Player {
     }
 
 
+
+
+
     public static void main(String[] args) {
-        Player player = new Player("mobin", "12", 0, "mobin", 0);
-         player.addDeck("amir");
-         createPlayerJsonFile(player);
+       Player player = getPlayerByUsername("a");
+       for(String s:player.listOfDeck){
+           System.out.println(s);
+       }
 
     }
 

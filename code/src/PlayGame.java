@@ -10,9 +10,6 @@ public class PlayGame {
     public static boolean duelInProcess;
 
     public static void controller(String input) {
-        if (duelInProcess) {
-
-        }
 
 
         if (doesHaveCreateGamePatters(input)) {
@@ -228,6 +225,7 @@ public class PlayGame {
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
         }
+        System.out.println();
         System.out.println(player.getNikName() + " : " + gameboard.getLp());
 
     }
@@ -263,15 +261,12 @@ public class PlayGame {
             System.out.println("number of rounds is not supported");
             return;
         }
-        self.setGameBoard(new GameBoard(self.getActiveDeck(), 1000));
-        opponent.setGameBoard(new GameBoard(opponent.getActiveDeck(), 1000));
+
+        Duel duel= new Duel(self,opponent,2500);
+        duel.DuelController();
         duelInProcess = true;
 
     }
-
-//    public static Game.Card cardSelection(Game.Player self, Game.Player opponent, String input) {
-//        re
-//    }
 
     public static Matcher givePatternTakeMatcher(String input, String pattern) {
         Matcher matcher = Pattern.compile(pattern).matcher(input);
@@ -403,7 +398,7 @@ public class PlayGame {
          player.setGameBoard(gameboard);
          gameboard.makeGameBoardReady();
          BattleWave battleWave = new BattleWave(player,player);
-         battleWave.drawphase();
+         battleWave.drawPhase();
         showGameBoard(player, player);
     }
 }
