@@ -6,7 +6,7 @@ public class Controller {
     public static int menuNumber = 1;
     public static Scanner scanner = new Scanner(System.in);
     static {
-        System.out.println("Login and SignUp Menu!");
+
     }
     public static void main(String[] args) {
         checkFolders();
@@ -27,6 +27,10 @@ public class Controller {
                     break;
                 case 4:
                     Deck.deckControl(input,MainMenu.player);
+                    break;
+                case 3:
+                    PlayGame.controller(input);
+                    break;
             }
         }
     }

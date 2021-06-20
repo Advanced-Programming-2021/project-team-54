@@ -28,13 +28,13 @@ public  static void mainMenuController(String input){
 }
 public static void enterMenu(Matcher matcher){
     String menu = matcher.group(1);
-    if(menu.contentEquals("Game.Duel"))
+    if(menu.contentEquals("Duel"))
         Controller.menuNumber = 3 ;
-    else if(menu.contentEquals("Game.Deck"))
+    else if(menu.contentEquals("Deck"))
         Controller.menuNumber = 4;
-    else  if(menu.contentEquals("Game.Scoreboard"))
+    else  if(menu.contentEquals("Scoreboard"))
         Controller.menuNumber = 5;
-    else if (menu.contentEquals("Game.Profile"))
+    else if (menu.contentEquals("Profile"))
         Controller.menuNumber = 6;
     else if (menu.contentEquals("Shop"))
         Controller.menuNumber=7;

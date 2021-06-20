@@ -1,9 +1,9 @@
-import h.jj;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Action {
+
+
     public static void summon(Card card, Player self, BattleWave battleWave) {
         GameBoard gameBoard = self.getGameBoard();
         Monster monster = (Monster) card;
@@ -219,7 +219,6 @@ public class Action {
 
     }
 
-
     public static void directAttack(Card attacker, Player self, Player opponent) {
 
         opponent.getGameBoard().increaseLp(((Monster) attacker).getAttackPower());
@@ -234,6 +233,10 @@ public class Action {
 
     }
 
+    public static void checkForUnlimitedSpell(BattleWave battleWave){
+
+    }
+
 
     public static void battle(Card attacker, Player self, Player opponent, Card defence, int defnum, BattleWave battleWave) {
 
@@ -244,6 +247,13 @@ public class Action {
     }
 
     public static void spellEffect(BattleWave battleWave) {
+    }
+    public static boolean spellTrapWhenBeAttacked(){
+        return false;
+    }
+    // public static boolean spellTrapWhenBeAttack
+    public static void actionForUnlimitedSpell(Actions actions){
+
     }
 }
 
@@ -316,6 +326,7 @@ class Monster_Reborn extends Action {
         }
         Card card = cards.get(getNumberOfChoose(cards));
         self.getGameBoard().putMonsterInMonsterField(card);
+        card.setState(Card.State.OO);
     }
 
     public static int getNumberOfChoose(ArrayList<Card> cards) {
@@ -336,7 +347,23 @@ class Monster_Reborn extends Action {
 
 
 class Terraforming extends Action {
+    public static void spellEffect(BattleWave battleWave){
 
+        Player self = battleWave.getSelf();
+        Player opponent  = battleWave.getOpponent();
+        if(self.getGameBoard().getInHandCard().size() == 6)
+            return;
+        ArrayList<String> cardNames = self.getGameBoard().getShuffledDeck();
+        for(int i = 0 ;  i  < cardNames.size() ; i++){
+            Card card = Card.getCardByName(cardNames.get(i));
+            if(card.getCardKind()==2&&(card.getCardName().contentEquals("Forest")
+            ||card.getCardName().contentEquals("Closed_Forest")||card.getCardName().contentEquals("Umiiruka")
+            ||card.getCardName().contentEquals("Yami"))){
+                self.getGameBoard().putCardInHand(card);
+                cardNames.remove(i);
+            }
+        }
+    }
 
 }
 
@@ -393,11 +420,16 @@ class Supply_Squad extends Action {
 }
 
 class Spell_Absorption extends Action {
+    public static void spellEffect(BattleWave battleWave){
+        actionForUnlimitedSpell(Actions.spellActivated);
+    }
 
 }
 
 class Messenger_of_Peace extends Action {
+    public static void checkForUnlimitedSpell(BattleWave battleWave){
 
+    }
 }
 
 class Twin_Twisters extends Action {
@@ -443,7 +475,9 @@ class United_We_Stand extends Action {
 class Magnum_Shield extends Action {
 
 }
-
+enum Actions {
+    spellActivated;
+}
 
 
 

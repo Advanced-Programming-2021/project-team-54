@@ -46,7 +46,12 @@ public class BattleWave {
         return setOrSummon;
     }
 
-    public void battleWaveController(String input) {
+    public int battleWaveController(String input) {
+
+        if(opponent.getGameBoard().getLp() <= 0)
+            return 1;
+        if (self.getGameBoard().getLp() <= 0)
+            return 2;
 
 
 
@@ -55,7 +60,7 @@ public class BattleWave {
         if (matcher.find()) {
 
             summonCard();
-            return;
+            return 0;
         }
         Pattern ShowBoardRegex = Pattern.compile("show");
         matcher = ShowBoardRegex.matcher(input);
@@ -63,47 +68,47 @@ public class BattleWave {
 
 
             showSelectedCard();
-            return;
+            return 0;
         }
         matcher = Pattern.compile("set -- position (attack|defense)").matcher(input);
         if (matcher.find()) {
             changeMonsterPosition(matcher);
-            return;
+            return 0;
         }
         matcher = Pattern.compile("flip-summon").matcher(input);
         if (matcher.find()) {
 
             flipSummon();
-            return;
+            return 0;
         }
         matcher = Pattern.compile("attack ([\\d]+)").matcher(input);
         if (matcher.find()) {
 
             attack(matcher);
-            return;
+            return 0;
         }
 
         matcher = Pattern.compile("^next phase$").matcher(input);
         if (matcher.find()) {
             goToNextPhase();
-            return;
+            return 0;
         }
         matcher = Pattern.compile("^select -d$").matcher(input);
         if (matcher.find()) {
             deselectingCard();
-            return;
+            return 0;
         }
         if(PlayGame.doesHaveSelectionPatterns(input)!=-1){
 
             selectCard(input);
-            return;
+            return 0;
 
         }
         matcher = Pattern.compile("^set$").matcher(input);
         if(matcher.find()){
 
             setCard();
-            return;
+            return 0;
 
 
 
@@ -111,6 +116,8 @@ public class BattleWave {
 
 
 
+        System.out.println("incorrect command");
+        return 0;
 
 
 
@@ -429,6 +436,7 @@ public class BattleWave {
     public ArrayList<Card> getListOfSelectedCard(){
         return selectedCard;
     }
+
 
 
     public void showSelectedCard(){

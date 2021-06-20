@@ -163,6 +163,10 @@ public class GameBoard {
     }
 
 
+    public  ArrayList<String> getShuffledDeck(){
+        return this.shuffledDeck;
+    }
+
     public void setMonsterField(HashMap<Integer, Card> field) {
         this.monsterField = field;
     }

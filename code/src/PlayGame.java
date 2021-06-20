@@ -17,6 +17,24 @@ public class PlayGame {
             return;
 
         }
+        Pattern menuExitRegex = Pattern.compile("menu exit");
+        Matcher matcher = menuExitRegex.matcher(input);
+        if(matcher.find()){
+            menuExit();
+            return;
+        }
+        Pattern showMenuRegex = Pattern.compile("menu show-current");
+        matcher = showMenuRegex.matcher(input);
+        if(matcher.find()){
+            showCurrentMenu();
+            return;
+        }
+        Pattern enterMenuRegex = Pattern.compile("menu enter (Shop|Profile|Deck|Scoreboard)");
+        matcher = enterMenuRegex.matcher(input);
+        if(matcher.find()){
+            enterMenu();
+            return;
+        }
 
 
         System.out.println("invalid command");
@@ -261,11 +279,20 @@ public class PlayGame {
             System.out.println("number of rounds is not supported");
             return;
         }
+        Duel.DuelMaker(round,self,opponent);
 
-        Duel duel= new Duel(self,opponent,2500);
-        duel.DuelController();
-        duelInProcess = true;
+    }
 
+    public static void menuExit() {
+        Controller.menuNumber = 2;
+    }
+
+    public static void showCurrentMenu() {
+        System.out.println("Duel Menu");
+    }
+
+    public static void enterMenu() {
+        System.out.println("you cant");
     }
 
     public static Matcher givePatternTakeMatcher(String input, String pattern) {
