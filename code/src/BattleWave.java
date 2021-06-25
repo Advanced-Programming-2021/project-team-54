@@ -114,6 +114,12 @@ public class BattleWave {
 
         }
 
+        matcher = Pattern.compile("^activate effect$").matcher(input);
+        if(matcher.find()){
+            activeSpellEffect();
+            return 0;
+        }
+
 
 
         System.out.println("incorrect command");
@@ -128,6 +134,27 @@ public class BattleWave {
         cardsThatSummonInThisPhases.add(card);
     }
 
+    public void activeSpellEffect(){
+
+        if(selectedCard.size()==0){
+            System.out.println("no card is selected yet");
+            return;
+        }
+        if(selectedCard.get(0).getCardKind()!=2){
+            System.out.println("activate effect is only for spell cards");
+            return;
+        }
+        if(selectedCard.get(0).getState()== Card.State.O){
+            System.out.println("you have already activated this card");
+            return;
+        }
+
+        selectedCard.get(0).setState(Card.State.O);
+        System.out.println("activated successful");
+
+
+
+    }
     public int getPhase() {
         return phase;
     }

@@ -156,7 +156,7 @@ public class GameBoard {
 
     public void makeGameBoardReady() {
         shuffleDeck();
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 5 && shuffledDeck.size()!=0; i++) {
             Card card = takeCardFromShuffleAndRemove();
             inHandCard.add(card);
         }

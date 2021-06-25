@@ -116,7 +116,7 @@ public class Duel {
    }
 
    public static void main(String[] args) {
-      Player self = Player.getPlayerByUsername("a");
+      Player self = Player.getPlayerByUsername("c");
       Player opponent = Player.getPlayerByUsername("b");
       //self.setGameboard( 1000);
     //  opponent.setGameboard(1000);

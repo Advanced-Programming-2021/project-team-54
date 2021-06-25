@@ -113,6 +113,6 @@ public class Profile {
         Controller.menuNumber = 2;
     }
     public static void showCurrentMenu(){
-        System.out.println("Game.Deck");
+        System.out.println("Profile");
     }
 }

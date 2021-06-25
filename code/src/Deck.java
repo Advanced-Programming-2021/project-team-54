@@ -609,8 +609,9 @@ public class Deck {
     }
 
     public static void main(String[] args) {
-        Deck deck = getDeckByName("a");
+        Deck deck = new Deck("m",new HashMap<>() ,new HashMap<>(),true);
+        deck.addCardToMainDeck("Magnum_Shield");
+        deck.addDeckFile();
 
-        System.out.println(deck.isActive);
     }
 }

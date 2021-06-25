@@ -287,10 +287,9 @@ public class Player {
 
 
     public static void main(String[] args) {
-       Player player = getPlayerByUsername("a");
-       for(String s:player.listOfDeck){
-           System.out.println(s);
-       }
+       Player player = new Player("c","1",0,"c",0);
+       player.addDeck("m");
+       player.updateInJsonFile();
 
     }
 

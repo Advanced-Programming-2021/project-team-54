@@ -9,7 +9,7 @@ public class Controller {
 
     }
     public static void main(String[] args) {
-        checkFolders();
+       // checkFolders();
         while (true) {
             String input = scanner.nextLine();
             switch (menuNumber) {

@@ -378,7 +378,7 @@ public class PlayGame {
                 number = Integer.parseInt(matcher.group(1));
                 if (number < 1 || number > self.getGameBoard().getNumberOfInHandCard())
                     return 1;
-                battleWave.selecting(self.getGameBoard().getInHandCard().get(number));
+                battleWave.selecting(self.getGameBoard().getInHandCard().get(number-1));
                 return 2;
             default:
                 return 0;
