@@ -5,5 +5,8 @@ public class ScoreboardTest {
     void scoreboardTest() {
         Scoreboard.scoreboardControl("show");
         Scoreboard.scoreboardControl("scoreboard show");
+        Scoreboard.scoreboardControl("menu show-current");
+        Scoreboard.exit();
+        Scoreboard.showCurrentMenu();
     }
 }

@@ -5,5 +5,6 @@ public class ChanceTest {
     void chanceTest() {
         Chance.dice();
         Chance.coin();
+        Chance.makeRandomNumber(12);
     }
 }
