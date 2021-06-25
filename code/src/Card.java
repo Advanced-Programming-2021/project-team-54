@@ -66,7 +66,7 @@ public class Card {
     }
 
     public static Card getCardByName(String name){
-        File file = new File(System.getProperty("user.dir")+"\\src\\cards\\"+name+".json");
+        File file = new File(System.getProperty("user.dir")+"/src/cards/"+name+".json");
         JSONParser jsonParser = new JSONParser();
         try(FileReader fileReader = new FileReader(file);) {
             JSONObject obj = (JSONObject) jsonParser.parse(fileReader);
@@ -88,7 +88,7 @@ public class Card {
 
     public static void exportCard(String name,String cardDescription) {
         String currentState = System.getProperty("user.dir");
-        File file = new File(currentState+"\\cards\\"+name+".json");
+        File file = new File(currentState+"/cards/"+name+".json");
         try (FileWriter fileWriter = new FileWriter(file)){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", name);

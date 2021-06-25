@@ -66,7 +66,7 @@ public class Player {
         playerDetails.put("decks", deckArray);
 
         String currentState = System.getProperty("user.dir");
-        File usersFile = new File(currentState + "\\src\\users\\" + player.username + ".json");
+        File usersFile = new File(currentState + "/src/users/" + player.username + ".json");
         try (FileWriter fileWriter = new FileWriter(usersFile)) {
             fileWriter.write(playerDetails.toJSONString());
             fileWriter.flush();
@@ -110,7 +110,7 @@ public class Player {
 
     public static Player getPlayerByUsername(String username) {
         String currentState = System.getProperty("user.dir");
-        File usersFile = new File(currentState + "\\src\\users\\" + username + ".json");
+        File usersFile = new File(currentState + "/src/users/" + username + ".json");
         JSONParser jsonParser = new JSONParser();
         try (FileReader fileReader = new FileReader(usersFile)) {
 
@@ -143,19 +143,19 @@ public class Player {
 
     public static boolean isThereThisUsername(String username) {
         String currentState = System.getProperty("user.dir");
-        File usersFile = new File(currentState + "\\src\\users\\" + username + ".json");
+        File usersFile = new File(currentState + "/src/users/" + username + ".json");
         return usersFile.exists();
     }
 
     public static boolean isThereThisNickname(String nickname) {
         String[] pathNames;
-        File file = new File(System.getProperty("user.dir") + "\\src\\users");
+        File file = new File(System.getProperty("user.dir") + "/src/users");
         pathNames = file.list();
 
         for (String string : pathNames) {
 
             JSONParser jsonParser = new JSONParser();
-            File userFile = new File(System.getProperty("user.dir") + "\\src\\users\\" + string);
+            File userFile = new File(System.getProperty("user.dir") + "/src/users/" + string);
             try (FileReader fileReader = new FileReader(userFile)) {
 
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
