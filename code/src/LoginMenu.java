@@ -60,7 +60,7 @@ public class LoginMenu {
             System.out.println("user with nickname "+nickname+" already exists");
             return;
         }
-        Player player = new Player(username, password, 0, nickname, 0);
+        Player player = new Player(username, password, 0, nickname, 100000);
         Player.createPlayerJsonFile(player);
         System.out.println("user created successfully!");
     }
