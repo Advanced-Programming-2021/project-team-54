@@ -31,6 +31,9 @@ public class Controller {
                 case 3:
                     PlayGame.controller(input);
                     break;
+                case 7:
+                    Shop.shopMenuController(input);
+                    break;
             }
         }
     }
