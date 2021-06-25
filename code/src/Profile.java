@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Profile {
-    public static  void profileControl(Player player , String input){
+    public static void profileControl(Player player , String input){
         Pattern changeNicknameRegex = Pattern.compile("profile change --nickname ([\\S]+)");
         Matcher matcher = changeNicknameRegex.matcher(input);
         if(matcher.find()){
@@ -70,7 +70,7 @@ public class Profile {
         profileControl(player,"profile change --password --current 1234 --new ss");
 
     }
-    public  static boolean haveThisStrChangePassPattern(String input){
+    public static boolean haveThisStrChangePassPattern(String input){
         String[] patterns = changePasswordPatterns();
         for (String patter:
              patterns) {

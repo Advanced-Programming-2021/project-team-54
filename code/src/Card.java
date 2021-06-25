@@ -8,7 +8,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 public class Card {
 
-
     private int cardPrice;
     private String cardType;
     private String cardName;
@@ -79,8 +78,6 @@ public class Card {
                 return Spell.getCardByName(name);
             if(kind == 3)
                 return Trap.getCardByName(name);
-
-
         }
         catch (Exception e){}
         return new Card("","",0,0,"");
@@ -102,8 +99,4 @@ public class Card {
 
     public  void addThisCardFile(){};
 
-    public static void main(String[] args) {
-        Card card = Monster.getCardByName("Axe_Raider");
-        System.out.println(card.getCardName());
-    }
 }

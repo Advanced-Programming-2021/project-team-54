@@ -38,7 +38,7 @@ public class Scoreboard {
     }
 
     public static Player[] getListOFPlayers() {
-        File file = new File(System.getProperty("user.dir") + "\\src\\users");
+        File file = new File(System.getProperty("user.dir") + "/src/users");
         String[] playersFileName = file.list();
         ArrayList<Player> players = new ArrayList<>();
         for (String s : playersFileName) {
