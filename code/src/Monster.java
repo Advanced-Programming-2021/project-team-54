@@ -13,15 +13,12 @@ public class Monster extends Card {
     private int defencePower;
     private int level;
 
-
     public int getAttackPower() {
         return attackPower;
     }
     public int getDefencePower(){
         return  defencePower;
     }
-
-
 
     Monster(String name, String description, int cardKind, int attackPower, int defencePower, int level , int price , String type) {
         super(name, description, cardKind,price,type);
@@ -75,12 +72,4 @@ public class Monster extends Card {
         return level;
     }
 
-//    public static void main(String[] args) {
-//        Game.Card monster = new Game.Monster("Tkakakak","pool",1,3000,600,7);
-//        monster.addThisCardFile();
-//    }
-public static void main(String[] args) {
-    Card card = Monster.getCardByName("Axe_Raider");
-    System.out.println(card.getCardName());
-}
 }

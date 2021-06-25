@@ -99,19 +99,6 @@ public class Duel {
                   break;
             }
          }
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
    }
 

@@ -159,12 +159,12 @@ public class LoginMenu {
         String username = matcher.group("name");
         String password = matcher.group("pass");
         if(!Player.isThereThisUsername(username)){
-            System.out.println("Username and password didn’t match!");
+            System.out.println("Username and password didn't match!");
             return;
         }
         Player player = Player.getPlayerByUsername(username);
         if(!player.getPassword().contentEquals(password)){
-            System.out.println("Username and password didn’t match!");
+            System.out.println("Username and password didn't match!");
             return ;
         }
         System.out.println("user logged in successfully!");

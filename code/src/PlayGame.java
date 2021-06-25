@@ -35,11 +35,7 @@ public class PlayGame {
             enterMenu();
             return;
         }
-
-
         System.out.println("invalid command");
-
-
     }
 
 
