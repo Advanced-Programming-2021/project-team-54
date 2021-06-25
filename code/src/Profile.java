@@ -50,7 +50,7 @@ public class Profile {
     public static boolean isNicknameAlreadyExist(String nickname){
         Player[] players = Scoreboard.getListOFPlayers();
         for(Player player:players){
-            if(nickname.contentEquals(player.getNikName()))
+            if(nickname.contentEquals(player.getNickName()))
                 return true;
         }
         return  false;

@@ -87,7 +87,7 @@ public class PlayGame {
 
     public static void topShow(Player player) {
         GameBoard gameboard = player.getGameBoard();
-        System.out.println(player.getNikName() + " : " + gameboard.getLp());
+        System.out.println(player.getNickName() + " : " + gameboard.getLp());
         System.out.print("    ");
         for (int i = 0; i < gameboard.getNumberOfInHandCard(); i++) {
             System.out.print("c   ");
@@ -244,7 +244,7 @@ public class PlayGame {
             System.out.print("c   ");
         }
         System.out.println();
-        System.out.println(player.getNikName() + " : " + gameboard.getLp());
+        System.out.println(player.getNickName() + " : " + gameboard.getLp());
 
     }
 

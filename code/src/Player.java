@@ -196,7 +196,7 @@ public class Player {
         return this.password;
     }
 
-    public String getNikName() {
+    public String getNickName() {
         return this.nickname;
     }
 
@@ -281,17 +281,5 @@ public class Player {
     public void setGameboard(int lp) {
         this.gameboard = new GameBoard(this.getActiveDeck(),lp);
     }
-
-
-
-
-
-    public static void main(String[] args) {
-       Player player = new Player("c","1",0,"c",0);
-       player.addDeck("m");
-       player.updateInJsonFile();
-
-    }
-
 
 }
