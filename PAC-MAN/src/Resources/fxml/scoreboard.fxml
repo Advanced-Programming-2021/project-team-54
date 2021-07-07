@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="900.0" prefHeight="600.0"
+            style="-fx-background-color: black"  xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.view.Scoreboard">
+    <top>
+        <HBox alignment="TOP_LEFT">
+            <Label fx:id="backText" onMouseClicked="#back" prefHeight="40.0" prefWidth="40.0" text="←" textFill="yellow">
+                <font>
+                    <Font size="24"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER">
+            <Label prefHeight="50.0" prefWidth="1490.0" text="Score Board" textFill="yellow" alignment="TOP_CENTER">
+                <font>
+                    <Font name="System Bold" size="34.0" />
+                </font>
+            </Label>
+            <Label fx:id="scoreBoardField" textFill="red">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+            <Label fx:id="you" textFill="greenyellow">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Label fx:id="scoreBoardField2" textFill="red">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+        </VBox>
+    </center>
+
+
+</BorderPane>
