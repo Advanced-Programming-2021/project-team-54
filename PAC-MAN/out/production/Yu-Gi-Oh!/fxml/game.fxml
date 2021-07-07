@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background-color: black" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.Game">
+    <top>
+        <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="900.0" alignment="CENTER">
+            <Text fx:id="livesLeft" GridPane.columnIndex="0" GridPane.rowIndex="0" fill="yellow">
+                <font>
+                    <Font size="20"></Font>
+                </font>
+            </Text>
+            <Text fx:id="score" GridPane.columnIndex="1" GridPane.rowIndex="0" fill="yellow">
+            <font>
+                <Font size="20"></Font>
+            </font>
+        </Text>
+            <Text fx:id="level" GridPane.columnIndex="2" GridPane.rowIndex="0" fill="yellow">
+        <font>
+            <Font size="20"></Font>
+        </font>
+    </Text>
+        </GridPane>
+    </top>
+    <center>
+        <GridPane fx:id="gameGrid" alignment="CENTER" />
+    </center>
+    <bottom>
+        <MediaView fx:id="musicView"/>
+        <MediaView fx:id="sfxView"/>
+        <HBox alignment="TOP_CENTER">
+            <Text text="Use W(UP)-A(LEFT)-S(DOWN)-D(RIGHT) to move. Use Escape key to pause. Press M(mute) to mute or unmute." fill="cyan">
+                <HBox.margin>
+                    <Insets right="100.0"/>
+                </HBox.margin>
+            </Text>
+            <Button onMouseClicked="#exit" text="Exit" style="-fx-background-color: red "/>
+        </HBox>
+    </bottom>
+</BorderPane>

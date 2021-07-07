@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            style="-fx-background-color: black"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller= "sample.view.ProfileMenu"
+            prefHeight="400.0" prefWidth="600.0">
+<top>
+    <HBox alignment="TOP_LEFT">
+        <Label fx:id="backText" layoutX="11.0" onMouseClicked="#back" prefHeight="40.0" prefWidth="40.0" text="←" textFill="yellow">
+            <font>
+                <Font size="24"/>
+            </font>
+        </Label>
+    </HBox>
+</top>
+<center>
+    <HBox alignment="CENTER">
+        <GridPane fx:id="profilePicture" alignment="CENTER"/>
+        <Label fx:id="profileInfo" textFill="red">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+    </HBox>
+</center>
+    <bottom>
+        <HBox alignment="TOP_CENTER" prefHeight="149.0" prefWidth="600.0">
+            <Button fx:id="changeNickname" onMouseClicked="#changeNickname" prefHeight="25" prefWidth="150"
+                    text="Change Nickname" style="-fx-background-color: red">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="changePassword" onMouseClicked="#changePassword" prefHeight="25" prefWidth="150"
+                    text="Change Password" style="-fx-background-color: red">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="changePicture" onMouseClicked="#changePicture" prefHeight="25" prefWidth="150"
+                    text="Change Picture" style="-fx-background-color: red"/>
+        </HBox>
+    </bottom>
+</BorderPane>

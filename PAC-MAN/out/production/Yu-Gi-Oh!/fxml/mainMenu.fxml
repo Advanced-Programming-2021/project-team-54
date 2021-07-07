@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefWidth="900.0" prefHeight="600.0"
+            style="-fx-background-color: black" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.MainMenu">
+    <top>
+        <HBox alignment="CENTER">
+            <Label fx:id="text1" text="Hello " textFill="yellow">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+            <Label fx:id="username" textFill="yellow">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <GridPane fx:id="gameTitle" alignment="CENTER">
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="TOP_CENTER" prefHeight="149.0" prefWidth="600.0">
+            <Button fx:id="playGameButton" onMouseClicked="#play" prefHeight="25" prefWidth="125"
+                    text="Play" style="-fx-background-color: purple">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="deckButton" onMouseClicked="#openDeckMenu" prefHeight="25" prefWidth="125"
+                    text="Decks" style="-fx-background-color: blue ">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="showScoreBoard" onMouseClicked="#scoreboard" prefHeight="25" prefWidth="125"
+                    text="Scoreboard" style="-fx-background-color: cyan">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="profileButton" onMouseClicked="#openProfileMenu" prefHeight="25" prefWidth="125"
+                    text="Profile" style="-fx-background-color: green">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="shopButton" onMouseClicked="#openShopMenu" prefHeight="25" prefWidth="125"
+                    text="Shop" style="-fx-background-color: yellow">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="importExportButton" onMouseClicked="#importExport" prefHeight="25" prefWidth="125"
+                    text="Import &amp; Export" style="-fx-background-color: orange">
+                <HBox.margin>
+                    <Insets right="10"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="logoutButton" onMouseClicked="#logout" prefHeight="25" prefWidth="125"
+                    text="logout" style="-fx-background-color: red"/>
+        </HBox>
+    </bottom>
+</BorderPane>
