@@ -26,4 +26,8 @@ public class Scoreboard {
     public void back(MouseEvent mouseEvent) {
         Main.changeScene(Scenes.MAIN_MENU);
     }
+
+    public void refresh(MouseEvent mouseEvent) {
+        initialize();
+    }
 }
