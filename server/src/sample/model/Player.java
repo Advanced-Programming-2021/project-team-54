@@ -3,6 +3,7 @@ package sample.model;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import sample.Main;
 
 import java.io.File;
 import java.io.FileReader;
@@ -166,6 +167,14 @@ public class Player {
         return false;
     }
 
+    public static Player getPlayerByNickname(String nickname) {
+        for (Player player : getListOFPlayers()) {
+            if (player.nickname.equals(nickname))
+                return player;
+        }
+        return null;
+    }
+
     public void setUsername(String name) {
         this.username = name;
     }
@@ -306,7 +315,11 @@ public class Player {
         return info.toString();
     }
 
-
+    public String getStatus() {
+        if (Main.isPlayerOnline(this))
+            return "online";
+        return "offline";
+    }
 
     public void changeProfilePicture() {
         Random random = new Random();

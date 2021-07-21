@@ -10,9 +10,7 @@
 <BorderPane prefWidth="900.0" prefHeight="600.0"
             style="-fx-background-color: black" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.view.Register">
-    <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
-        <Image url="/assets/Sleeve/59949.jpeg"/>
-    </ImageView>
+
     <top>
         <HBox alignment="TOP_LEFT">
             <Label fx:id="backText" layoutX="11.0" onMouseClicked="#back" prefHeight="40.0" prefWidth="40.0" text="←" textFill="yellow">

@@ -1,5 +1,6 @@
 package sample.model;
 
+import sample.Main;
 import sample.controller.CommandController;
 import sample.controller.PlayerController;
 import java.io.DataInputStream;
@@ -25,7 +26,6 @@ public class Server {
                         while (true) {
                             String input = dataInputStream.readUTF();
                             String result = process(input);
-                            System.out.println(result);
                             if (result.equals("")) break;
                             dataOutputStream.writeUTF(result);
                             dataOutputStream.flush();
@@ -78,7 +78,7 @@ public class Server {
         }
         String authToken = matcher.group("authToken");
         String nickname = matcher.group("nickname");
-        return PlayerController.changeNickname(OnlinePlayer.getPlayerByAuthToken(authToken), nickname).toString();
+        return PlayerController.changeNickname(Main.getPlayerByAuthToken(authToken), nickname).toString();
     }
 
     private String changeProfilePicture(String input) {
@@ -91,8 +91,8 @@ public class Server {
                 break;
         }
         String authToken = matcher.group("authToken");
-        if (OnlinePlayer.getPlayerByAuthToken(authToken) != null)
-            OnlinePlayer.getPlayerByAuthToken(authToken).changeProfilePicture();
+        if (Main.getPlayerByAuthToken(authToken) != null)
+            Main.getPlayerByAuthToken(authToken).changeProfilePicture();
         return "0";
     }
 
@@ -106,8 +106,8 @@ public class Server {
                 break;
         }
         String authToken = matcher.group("authToken");
-        if (OnlinePlayer.getPlayerByAuthToken(authToken) != null)
-            return OnlinePlayer.getPlayerByAuthToken(authToken).getProfileInfo();
+        if (Main.getPlayerByAuthToken(authToken) != null)
+            return Main.getPlayerByAuthToken(authToken).getProfileInfo();
         return "0";
     }
 
@@ -121,8 +121,8 @@ public class Server {
                 break;
         }
         String authToken = matcher.group("authToken");
-        if (OnlinePlayer.getPlayerByAuthToken(authToken) != null) {
-            ArrayList<String> scoreboard = PlayerController.getScoreBoard(OnlinePlayer.getPlayerByAuthToken(authToken));
+        if (Main.getPlayerByAuthToken(authToken) != null) {
+            ArrayList<String> scoreboard = PlayerController.getScoreBoard(Main.getPlayerByAuthToken(authToken));
             String result = "";
             for (String part : scoreboard)
                 result += part + "partioned";
@@ -141,8 +141,8 @@ public class Server {
                 break;
         }
         String authToken = matcher.group("authToken");
-        if (OnlinePlayer.getPlayerByAuthToken(authToken) != null)
-            return String.valueOf(OnlinePlayer.getPlayerByAuthToken(authToken).getProfilePictureID());
+        if (Main.getPlayerByAuthToken(authToken) != null)
+            return String.valueOf(Main.getPlayerByAuthToken(authToken).getProfilePictureID());
         return "0";
     }
 
@@ -156,8 +156,8 @@ public class Server {
                 break;
         }
         String authToken = matcher.group("authToken");
-        if (OnlinePlayer.getPlayerByAuthToken(authToken) != null)
-            OnlinePlayer.getOnlinePlayerByAuthToken(authToken).logout();
+        if (Main.getPlayerByAuthToken(authToken) != null)
+            Main.logout(authToken);
         return "success";
     }
 
@@ -173,7 +173,7 @@ public class Server {
         String authToken = matcher.group("authToken");
         String oldPass = matcher.group("oldPass");
         String newPass = matcher.group("newPass");
-        return PlayerController.changePassword(OnlinePlayer.getPlayerByAuthToken(authToken) ,oldPass, newPass).toString();
+        return PlayerController.changePassword(Main.getPlayerByAuthToken(authToken) ,oldPass, newPass).toString();
     }
 
     private String login(String input) {

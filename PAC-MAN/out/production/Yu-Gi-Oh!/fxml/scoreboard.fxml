@@ -41,6 +41,9 @@
             </Label>
         </VBox>
     </center>
-
-
+    <bottom>
+        <HBox alignment="CENTER">
+        <Button fx:id="refreshButton" onMouseClicked="#refresh" prefHeight="25" prefWidth="100"
+                 text="Refresh" style="-fx-background-color: white"/></HBox>
+    </bottom>
 </BorderPane>

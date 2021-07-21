@@ -6,6 +6,7 @@ public enum ErrorMessages {
     TAKEN_NICKNAME("This nickname has already been taken!"),
     USER_NOT_IN_DATABASE("Username and password didn't match!"), //There is no player with this username in our database!
     WRONG_PASSWORD("Username and password didn't match!"), //Password was incorrect!
+    PLAYER_ALREADY_LOGGED_IN("This player has already logged in!"),
     OLD_PASS_WRONG("Current password is incorrect!"),
     NEW_PASS_IS_OLD_PASS("Your new password can't be your current password!"),
     NEW_NICK_IS_OLD_NICK("Your new nickname can't be your current nickname!"),
@@ -25,6 +26,8 @@ public enum ErrorMessages {
             return TAKEN_NICKNAME;
         if (error.equals("USER_NOT_IN_DATABASE"))
             return USER_NOT_IN_DATABASE;
+        if (error.equals("PLAYER_ALREADY_LOGGED_IN"))
+            return PLAYER_ALREADY_LOGGED_IN;
         if (error.equals("WRONG_PASSWORD"))
             return WRONG_PASSWORD;
         if (error.equals("OLD_PASS_WRONG"))

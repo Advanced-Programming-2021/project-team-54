@@ -1,6 +1,6 @@
 package sample.controller;
 
-import sample.model.OnlinePlayer;
+import sample.Main;
 import sample.model.Player;
 import sample.model.enums.ErrorMessages;
 
@@ -20,7 +20,7 @@ public class PlayerController {
             return ErrorMessages.TAKEN_NICKNAME;
         }
         Random random = new Random();
-        Player player = new Player(username, password, 0, nickname, 0, random.nextInt(38));
+        Player player = new Player(username, password, 0, nickname, 100, random.nextInt(38));
         Player.createPlayerJsonFile(player);
         System.out.println("user created successfully!");
         return ErrorMessages.SUCCESS;
@@ -38,9 +38,13 @@ public class PlayerController {
             System.out.println("Username and password didn't match!");
             return ErrorMessages.WRONG_PASSWORD.toString();
         }
-        System.out.println("user logged in successfully!");
+        if (Main.isPlayerOnline(player)) {
+            System.out.println("Player already logged in!");
+            return ErrorMessages.PLAYER_ALREADY_LOGGED_IN.toString();
+        }
+
         String authToken = givenUsingJava8_whenGeneratingRandomAlphanumericString_thenCorrect();
-        new OnlinePlayer(player, authToken);
+        Main.onlinePlayers.put(player, authToken);
         String result = ErrorMessages.SUCCESS.toString() + " " + authToken;
         return result;
     }
@@ -109,7 +113,7 @@ public class PlayerController {
         for (Map.Entry<String , Integer> element : map.entrySet()) {
             if (numberOfPlayersShown > 20) {
                 scoreboardList.add(scoreboard);
-                return scoreboardList; //only show the top 10 players on the scoreboard
+                return scoreboardList; //only show the top 20 players on the scoreboard
             }
             if (element.getValue() != last) {
                 last = element.getValue();
@@ -119,9 +123,9 @@ public class PlayerController {
                 if (scoreboardList.size() == 0)
                     scoreboardList.add(scoreboard);
                 scoreboard = "";
-                scoreboardList.add(rank + " - " + element.getKey() + "\t" + element.getValue() + "\n");
+                scoreboardList.add(rank + " - " + element.getKey() + "\t" + element.getValue() + "\t" + Player.getPlayerByNickname(element.getKey()).getStatus() + "\n");
             } else
-                scoreboard = scoreboard + rank + " - " + element.getKey() + "\t" + element.getValue() + "\n";
+                scoreboard = scoreboard + rank + " - " + element.getKey() + "\t" + element.getValue() + "\t" + Player.getPlayerByNickname(element.getKey()).getStatus() + "\n";
             numberOfPlayersShown++;
         }
         scoreboardList.add(scoreboard);
